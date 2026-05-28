@@ -678,7 +678,6 @@ func TestBuild_Integration_GoogleSpec(t *testing.T) {
 	}
 
 	for _, p := range paths {
-		p := p
 		t.Run(p, func(t *testing.T) {
 			t.Parallel()
 			model, err := spec.Load(p)

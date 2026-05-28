@@ -187,8 +187,8 @@ func computeEncodeBlock(goName, goType, paramName string, isPointer, isEnum, isH
 	}
 
 	// Slice → repeated Add calls.
-	if strings.HasPrefix(goType, "[]") {
-		elemType := strings.TrimPrefix(goType, "[]")
+	if after, ok := strings.CutPrefix(goType, "[]"); ok {
+		elemType := after
 		if elemType == "byte" {
 			return fmt.Sprintf("\tif len(%s) > 0 {\n\t\t%s.Set(%q, string(%s))\n\t}",
 				varExpr, setter, paramName, varExpr)
@@ -266,8 +266,8 @@ func needsStrconv(goType string) bool {
 	case "bool", "int32", "int64", "float32", "float64":
 		return true
 	}
-	if strings.HasPrefix(goType, "[]") {
-		return needsStrconv(strings.TrimPrefix(goType, "[]"))
+	if after, ok := strings.CutPrefix(goType, "[]"); ok {
+		return needsStrconv(after)
 	}
 	return false
 }

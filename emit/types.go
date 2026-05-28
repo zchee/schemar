@@ -203,7 +203,7 @@ func writeComment(b *strings.Builder, comment, indent string) {
 	if comment == "" {
 		return
 	}
-	for _, line := range strings.Split(comment, "\n") {
+	for line := range strings.SplitSeq(comment, "\n") {
 		trimmed := strings.TrimRight(line, " \t")
 		if trimmed == "" {
 			fmt.Fprintf(b, "%s//\n", indent)

@@ -46,7 +46,7 @@ func irWith(pkg string, schemas ...ir.NamedType) *ir.IR {
 // every word in words. This is robust to gofmt column-alignment which
 // inserts tab-stops between struct field names, types, and tags.
 func lineContainsAll(text string, words ...string) bool {
-	for _, line := range strings.Split(text, "\n") {
+	for line := range strings.SplitSeq(text, "\n") {
 		found := true
 		for _, w := range words {
 			if !strings.Contains(line, w) {
@@ -162,7 +162,7 @@ func TestRenderTypes_Struct(t *testing.T) {
 				// Embedded field has no json tag — verify Agent appears but never with a backtick-tag on same line.
 				if lineContainsAll(got, "Agent", "`") {
 					// Only fail if the line with "Agent" has a tag — embedded fields must not.
-					for _, line := range strings.Split(got, "\n") {
+					for line := range strings.SplitSeq(got, "\n") {
 						if strings.Contains(line, "Agent") && strings.Contains(line, "`") &&
 							!strings.Contains(line, "//") && !strings.Contains(line, "ExtendedAgent") {
 							t.Errorf("embedded Agent field should not have a struct tag: %q", line)
