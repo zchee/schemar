@@ -1,0 +1,84 @@
+openapi: "3.0.3"
+info:
+  title: Collision Test
+  version: "1.0"
+paths:
+  /things:
+    get:
+      operationId: listThings
+      parameters:
+        - name: filter
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FooBar'
+components:
+  schemas:
+    # FooBar.config → inline name "FooBarConfig"
+    FooBar:
+      type: object
+      description: FooBar schema with an inline config object.
+      properties:
+        config:
+          type: object
+          properties:
+            value:
+              type: string
+            enabled:
+              type: boolean
+
+    # Foo.barConfig → also derives "FooBarConfig" (collision!) — must become "FooBarConfig2"
+    Foo:
+      type: object
+      description: Foo schema whose barConfig field collides with FooBar.config.
+      properties:
+        barConfig:
+          type: object
+          properties:
+            value:
+              type: integer
+            label:
+              type: string
+
+    # A schema with multiple inline objects under the same parent that share a prefix
+    Container:
+      type: object
+      description: Container with two inline objects whose derived names share a prefix.
+      properties:
+        item:
+          type: object
+          properties:
+            id:
+              type: string
+        itemExtra:
+          type: object
+          properties:
+            count:
+              type: integer
+
+    # An enum schema
+    Status:
+      type: string
+      enum: [active, inactive, pending]
+
+    # An allOf embedding
+    Extended:
+      allOf:
+        - $ref: '#/components/schemas/FooBar'
+
+    # An array alias
+    FooList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Foo'
+
+    # A map alias
+    Labels:
+      type: object
+      additionalProperties:
+        type: string

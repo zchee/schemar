@@ -1,0 +1,1087 @@
+[warning] AdminApiKeyLastUsedAt.Variant2: unrecognised field schema type="null"
+[warning] AdminApiKeyName.Variant2: unrecognised field schema type="null"
+[warning] ApiKeyListFirstID.Variant2: unrecognised field schema type="null"
+[warning] ApiKeyListLastID.Variant2: unrecognised field schema type="null"
+[warning] ApplyPatchToolCallItemParamID.Variant2: unrecognised field schema type="null"
+[warning] ApplyPatchToolCallOutputItemParamID.Variant2: unrecognised field schema type="null"
+[warning] ApplyPatchToolCallOutputItemParamOutput.Variant2: unrecognised field schema type="null"
+[warning] ApplyPatchToolCallOutputOutput.Variant2: unrecognised field schema type="null"
+[warning] ApproximateLocationCity.Variant2: unrecognised field schema type="null"
+[warning] ApproximateLocationCountry.Variant2: unrecognised field schema type="null"
+[warning] ApproximateLocationRegion.Variant2: unrecognised field schema type="null"
+[warning] ApproximateLocationTimezone.Variant2: unrecognised field schema type="null"
+[warning] AssignedRoleDetailsCreatedAt.Variant2: unrecognised field schema type="null"
+[warning] AssignedRoleDetailsCreatedBy.Variant2: unrecognised field schema type="null"
+[warning] AssignedRoleDetailsCreatedByUserObj.Variant2: unrecognised field schema type="null"
+[warning] AssignedRoleDetailsDescription.Variant2: unrecognised field schema type="null"
+[warning] AssignedRoleDetailsMetadata.Variant2: unrecognised field schema type="null"
+[warning] AssignedRoleDetailsUpdatedAt.Variant2: unrecognised field schema type="null"
+[warning] AssistantObjectDescription.Variant2: unrecognised field schema type="null"
+[warning] AssistantObjectInstructions.Variant2: unrecognised field schema type="null"
+[warning] AssistantObjectName.Variant2: unrecognised field schema type="null"
+[warning] AssistantObjectResponseFormat.Variant2: unrecognised field schema type="null"
+[warning] AssistantObjectTemperature.Variant2: unrecognised field schema type="null"
+[warning] AssistantObjectToolResources.Variant2: unrecognised field schema type="null"
+[warning] AssistantObjectTopP.Variant2: unrecognised field schema type="null"
+[warning] AttachmentPreviewURL.Variant2: unrecognised field schema type="null"
+[warning] AuditLogActor2.Variant2: unrecognised field schema type="null"
+[warning] AutoCodeInterpreterToolParamMemoryLimit.Variant2: unrecognised field schema type="null"
+[warning] BatchErrorsDataItemLine.Variant2: unrecognised field schema type="null"
+[warning] BatchErrorsDataItemParam.Variant2: unrecognised field schema type="null"
+[warning] CertificateName.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionMessageListDataItemContentParts.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionModalities.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionRequestAssistantMessageAudio.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionRequestAssistantMessageContent.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionRequestAssistantMessageFunctionCall.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionRequestAssistantMessageRefusal.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionRequestFunctionMessageContent.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionResponseMessageAudio.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionResponseMessageContent.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionResponseMessageRefusal.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionStreamOptions.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionStreamResponseDeltaContent.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionStreamResponseDeltaRefusal.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionTokenLogprobBytes.Variant2: unrecognised field schema type="null"
+[warning] ChatCompletionTokenLogprobTopLogprobsItemBytes.Variant2: unrecognised field schema type="null"
+[warning] ChatSessionFileUploadMaxFileSize.Variant2: unrecognised field schema type="null"
+[warning] ChatSessionFileUploadMaxFiles.Variant2: unrecognised field schema type="null"
+[warning] ChatSessionHistoryRecentThreads.Variant2: unrecognised field schema type="null"
+[warning] ChatkitWorkflowStateVariables.Variant2: unrecognised field schema type="null"
+[warning] ChatkitWorkflowVersion.Variant2: unrecognised field schema type="null"
+[warning] ClickParamKeys.Variant2: unrecognised field schema type="null"
+[warning] ClientToolCallItemOutput.Variant2: unrecognised field schema type="null"
+[warning] ClosedStatusReason.Variant2: unrecognised field schema type="null"
+[warning] CodeInterpreterToolCallCode.Variant2: unrecognised field schema type="null"
+[warning] CodeInterpreterToolCallOutputs.Variant2: unrecognised field schema type="null"
+[warning] CompactResponseMethodPublicBodyInput.Variant2: unrecognised field schema type="null"
+[warning] CompactResponseMethodPublicBodyInstructions.Variant2: unrecognised field schema type="null"
+[warning] CompactResponseMethodPublicBodyPreviousResponseID.Variant2: unrecognised field schema type="null"
+[warning] CompactResponseMethodPublicBodyPromptCacheKey.Variant2: unrecognised field schema type="null"
+[warning] CompactResponseMethodPublicBodyPromptCacheRetention.Variant2: unrecognised field schema type="null"
+[warning] CompactResponseMethodPublicBodyServiceTier.Variant2: unrecognised field schema type="null"
+[warning] CompactionSummaryItemParamID.Variant2: unrecognised field schema type="null"
+[warning] CompoundFilterFiltersItem.Variant2: unrecognised field schema type=""
+[warning] ComputerCallOutputItemParamAcknowledgedSafetyChecks.Variant2: unrecognised field schema type="null"
+[warning] ComputerCallOutputItemParamID.Variant2: unrecognised field schema type="null"
+[warning] ComputerCallOutputItemParamStatus.Variant2: unrecognised field schema type="null"
+[warning] ComputerCallSafetyCheckParamCode.Variant2: unrecognised field schema type="null"
+[warning] ComputerCallSafetyCheckParamMessage.Variant2: unrecognised field schema type="null"
+[warning] ComputerScreenshotContentFileID.Variant2: unrecognised field schema type="null"
+[warning] ComputerScreenshotContentImageURL.Variant2: unrecognised field schema type="null"
+[warning] ContainerAutoParamMemoryLimit.Variant2: unrecognised field schema type="null"
+[warning] ContextManagementParamCompactThreshold.Variant2: unrecognised field schema type="null"
+[warning] ConversationResource.Metadata: unrecognised field schema type=""
+[warning] CostsResultAPIKeyID.Variant2: unrecognised field schema type="null"
+[warning] CostsResultLineItem.Variant2: unrecognised field schema type="null"
+[warning] CostsResultProjectID.Variant2: unrecognised field schema type="null"
+[warning] CostsResultQuantity.Variant2: unrecognised field schema type="null"
+[warning] CreateAssistantRequestDescription.Variant2: unrecognised field schema type="null"
+[warning] CreateAssistantRequestInstructions.Variant2: unrecognised field schema type="null"
+[warning] CreateAssistantRequestName.Variant2: unrecognised field schema type="null"
+[warning] CreateAssistantRequestResponseFormat.Variant2: unrecognised field schema type="null"
+[warning] CreateAssistantRequestTemperature.Variant2: unrecognised field schema type="null"
+[warning] CreateAssistantRequestToolResources.Variant2: unrecognised field schema type="null"
+[warning] CreateAssistantRequestToolResourcesVariant1FileSearch.Variant1: unrecognised field schema type=""
+[warning] CreateAssistantRequestToolResourcesVariant1FileSearch.Variant2: unrecognised field schema type=""
+[warning] CreateAssistantRequestTopP.Variant2: unrecognised field schema type="null"
+[warning] CreateChatCompletionResponseChoicesItemLogprobs.Variant2: unrecognised field schema type="null"
+[warning] CreateChatCompletionResponseChoicesItemLogprobsVariant1Content.Variant2: unrecognised field schema type="null"
+[warning] CreateChatCompletionResponseChoicesItemLogprobsVariant1Refusal.Variant2: unrecognised field schema type="null"
+[warning] CreateCompletionResponseChoicesItemLogprobs.Variant2: unrecognised field schema type="null"
+[warning] CreateConversationBodyItems.Variant2: unrecognised field schema type="null"
+[warning] CreateConversationBodyMetadata.Variant2: unrecognised field schema type="null"
+[warning] CreateImageEditRequestInputFidelity.Variant2: unrecognised field schema type="null"
+[warning] CreateMessageRequestAttachments.Variant2: unrecognised field schema type="null"
+[warning] CreateModerationResponseResultsItemCategoriesIllicit.Variant2: unrecognised field schema type="null"
+[warning] CreateModerationResponseResultsItemCategoriesIllicitViolent.Variant2: unrecognised field schema type="null"
+[warning] CreateResponseContextManagement.Variant2: unrecognised field schema type="null"
+[warning] CreateResponseConversation.Variant2: unrecognised field schema type="null"
+[warning] CreateResponseInclude.Variant2: unrecognised field schema type="null"
+[warning] CreateResponseInstructions.Variant2: unrecognised field schema type="null"
+[warning] CreateResponseMaxOutputTokens.Variant2: unrecognised field schema type="null"
+[warning] CreateResponseParallelToolCalls.Variant2: unrecognised field schema type="null"
+[warning] CreateResponseStore.Variant2: unrecognised field schema type="null"
+[warning] CreateResponseStream.Variant2: unrecognised field schema type="null"
+[warning] CreateThreadRequestToolResources.Variant2: unrecognised field schema type="null"
+[warning] CreateThreadRequestToolResourcesVariant1FileSearch.Variant1: unrecognised field schema type=""
+[warning] CreateThreadRequestToolResourcesVariant1FileSearch.Variant2: unrecognised field schema type=""
+[warning] CreateTranscriptionRequestChunkingStrategy.Variant2: unrecognised field schema type="null"
+[warning] CreateTranscriptionRequestStream.Variant2: unrecognised field schema type="null"
+[warning] CreateVectorStoreFileBatchRequest.Variant1: unrecognised field schema type=""
+[warning] CreateVectorStoreFileBatchRequest.Variant2: unrecognised field schema type=""
+[warning] CreateVideoCharacter: multipart/form-data request body skipped (not in v1 scope)
+[warning] DoubleClickActionKeys.Variant2: unrecognised field schema type="null"
+[warning] DragParamKeys.Variant2: unrecognised field schema type="null"
+[warning] EasyInputMessagePhase.Variant2: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamBackground.Variant2: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamInputFidelity.Variant2: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamModel.Variant3: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamModeration.Variant2: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamN.Variant2: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamOutputCompression.Variant2: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamOutputFormat.Variant2: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamQuality.Variant2: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamSize.Variant2: unrecognised field schema type="null"
+[warning] EditImageBodyJsonParamStream.Variant2: unrecognised field schema type="null"
+[warning] ErrorCode.Variant2: unrecognised field schema type="null"
+[warning] ErrorParam.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceCreatedAfter.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceCreatedBefore.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceInstructionsSearch.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceMetadata.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceModel.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceReasoningEffort.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceTemperature.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceTools.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceTopP.Variant2: unrecognised field schema type="null"
+[warning] EvalResponsesSourceUsers.Variant2: unrecognised field schema type="null"
+[warning] EvalRunOutputItemResultSample.Variant2: unrecognised field schema type="null"
+[warning] EvalStoredCompletionsSourceCreatedAfter.Variant2: unrecognised field schema type="null"
+[warning] EvalStoredCompletionsSourceCreatedBefore.Variant2: unrecognised field schema type="null"
+[warning] EvalStoredCompletionsSourceLimit.Variant2: unrecognised field schema type="null"
+[warning] EvalStoredCompletionsSourceModel.Variant2: unrecognised field schema type="null"
+[warning] FileSearchToolCallResults.Variant2: unrecognised field schema type="null"
+[warning] FileSearchToolFilters.Variant2: unrecognised field schema type="null"
+[warning] FineTuningIntegrationWandbEntity.Variant2: unrecognised field schema type="null"
+[warning] FineTuningIntegrationWandbName.Variant2: unrecognised field schema type="null"
+[warning] FineTuningJobError.Variant2: unrecognised field schema type="null"
+[warning] FineTuningJobErrorVariant1Param.Variant2: unrecognised field schema type="null"
+[warning] FineTuningJobEstimatedFinish.Variant2: unrecognised field schema type="null"
+[warning] FineTuningJobFineTunedModel.Variant2: unrecognised field schema type="null"
+[warning] FineTuningJobFinishedAt.Variant2: unrecognised field schema type="null"
+[warning] FineTuningJobHyperparametersBatchSize.Variant2: unrecognised field schema type="null"
+[warning] FineTuningJobIntegrations.Variant2: unrecognised field schema type="null"
+[warning] FineTuningJobTrainedTokens.Variant2: unrecognised field schema type="null"
+[warning] FineTuningJobValidationFile.Variant2: unrecognised field schema type="null"
+[warning] FunctionCallOutputItemParamID.Variant2: unrecognised field schema type="null"
+[warning] FunctionCallOutputItemParamStatus.Variant2: unrecognised field schema type="null"
+[warning] FunctionObjectStrict.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellActionMaxOutputLength.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellActionParamMaxOutputLength.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellActionParamTimeoutMs.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellActionTimeoutMs.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellCallEnvironment.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellCallItemParamEnvironment.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellCallItemParamID.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellCallItemParamStatus.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellCallOutputItemParamID.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellCallOutputItemParamMaxOutputLength.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellCallOutputItemParamStatus.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellCallOutputMaxOutputLength.Variant2: unrecognised field schema type="null"
+[warning] FunctionShellToolParamEnvironment.Variant2: unrecognised field schema type="null"
+[warning] FunctionToolDescription.Variant2: unrecognised field schema type="null"
+[warning] FunctionToolParamDescription.Variant2: unrecognised field schema type="null"
+[warning] FunctionToolParamParameters.Variant2: unrecognised field schema type="null"
+[warning] FunctionToolParamStrict.Variant2: unrecognised field schema type="null"
+[warning] FunctionToolParameters.Variant1Value: unrecognised field schema type=""
+[warning] FunctionToolParameters.Variant2: unrecognised field schema type="null"
+[warning] FunctionToolStrict.Variant2: unrecognised field schema type="null"
+[warning] GraderScoreModelSamplingParamsMaxCompletionsTokens.Variant2: unrecognised field schema type="null"
+[warning] GraderScoreModelSamplingParamsSeed.Variant2: unrecognised field schema type="null"
+[warning] GraderScoreModelSamplingParamsTemperature.Variant2: unrecognised field schema type="null"
+[warning] GraderScoreModelSamplingParamsTopP.Variant2: unrecognised field schema type="null"
+[warning] GroupListResourceNext.Variant2: unrecognised field schema type="null"
+[warning] GroupUserEmail.Variant2: unrecognised field schema type="null"
+[warning] ImageGenToolCallResult.Variant2: unrecognised field schema type="null"
+[warning] ImageGenToolInputFidelity.Variant2: unrecognised field schema type="null"
+[warning] ImageRefParam.Variant1: unrecognised field schema type=""
+[warning] ImageRefParam.Variant2: unrecognised field schema type=""
+[warning] InferenceOptionsModel.Variant2: unrecognised field schema type="null"
+[warning] InferenceOptionsToolChoice.Variant2: unrecognised field schema type="null"
+[warning] InputFileContentFileID.Variant2: unrecognised field schema type="null"
+[warning] InputFileContentParamFileData.Variant2: unrecognised field schema type="null"
+[warning] InputFileContentParamFileID.Variant2: unrecognised field schema type="null"
+[warning] InputFileContentParamFileURL.Variant2: unrecognised field schema type="null"
+[warning] InputFileContentParamFilename.Variant2: unrecognised field schema type="null"
+[warning] InputImageContentFileID.Variant2: unrecognised field schema type="null"
+[warning] InputImageContentImageURL.Variant2: unrecognised field schema type="null"
+[warning] InputImageContentParamAutoParamDetail.Variant2: unrecognised field schema type="null"
+[warning] InputImageContentParamAutoParamFileID.Variant2: unrecognised field schema type="null"
+[warning] InputImageContentParamAutoParamImageURL.Variant2: unrecognised field schema type="null"
+[warning] InviteAcceptedAt.Variant2: unrecognised field schema type="null"
+[warning] InviteExpiresAt.Variant2: unrecognised field schema type="null"
+[warning] InviteListResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] InviteListResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ItemReferenceParamType.Variant2: unrecognised field schema type="null"
+[warning] ListAuditLogsResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ListAuditLogsResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ListCertificatesResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ListCertificatesResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ListFineTuningCheckpointPermissionResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ListFineTuningCheckpointPermissionResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ListFineTuningJobCheckpointsResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ListFineTuningJobCheckpointsResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ListProjectCertificatesResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ListProjectCertificatesResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] LocalShellExecActionTimeoutMs.Variant2: unrecognised field schema type="null"
+[warning] LocalShellExecActionUser.Variant2: unrecognised field schema type="null"
+[warning] LocalShellExecActionWorkingDirectory.Variant2: unrecognised field schema type="null"
+[warning] LocalShellToolCallOutputStatus.Variant2: unrecognised field schema type="null"
+[warning] LockedStatusReason.Variant2: unrecognised field schema type="null"
+[warning] MCPApprovalResponseID.Variant2: unrecognised field schema type="null"
+[warning] MCPApprovalResponseReason.Variant2: unrecognised field schema type="null"
+[warning] MCPApprovalResponseResourceReason.Variant2: unrecognised field schema type="null"
+[warning] MCPListToolsError.Variant2: unrecognised field schema type="null"
+[warning] MCPListToolsToolAnnotations.Variant2: unrecognised field schema type="null"
+[warning] MCPListToolsToolDescription.Variant2: unrecognised field schema type="null"
+[warning] MCPToolAllowedTools.Variant2: unrecognised field schema type="null"
+[warning] MCPToolCallApprovalRequestID.Variant2: unrecognised field schema type="null"
+[warning] MCPToolCallError.Variant2: unrecognised field schema type="null"
+[warning] MCPToolCallOutput.Variant2: unrecognised field schema type="null"
+[warning] MCPToolHeaders.Variant2: unrecognised field schema type="null"
+[warning] MCPToolRequireApproval.Variant2: unrecognised field schema type="null"
+[warning] MessageObjectAssistantID.Variant2: unrecognised field schema type="null"
+[warning] MessageObjectAttachments.Variant2: unrecognised field schema type="null"
+[warning] MessageObjectCompletedAt.Variant2: unrecognised field schema type="null"
+[warning] MessageObjectIncompleteAt.Variant2: unrecognised field schema type="null"
+[warning] MessageObjectIncompleteDetails.Variant2: unrecognised field schema type="null"
+[warning] MessageObjectRunID.Variant2: unrecognised field schema type="null"
+[warning] MessagePhase3.Variant2: unrecognised field schema type="null"
+[warning] Metadata.Variant2: unrecognised field schema type="null"
+[warning] ModelIdsCompaction.Variant3: unrecognised field schema type="null"
+[warning] ModelResponsePropertiesPromptCacheRetention.Variant2: unrecognised field schema type="null"
+[warning] ModelResponsePropertiesTemperature.Variant2: unrecognised field schema type="null"
+[warning] ModelResponsePropertiesTopLogprobs.Variant2: unrecognised field schema type="null"
+[warning] ModelResponsePropertiesTopP.Variant2: unrecognised field schema type="null"
+[warning] ModifyAssistantRequestDescription.Variant2: unrecognised field schema type="null"
+[warning] ModifyAssistantRequestInstructions.Variant2: unrecognised field schema type="null"
+[warning] ModifyAssistantRequestName.Variant2: unrecognised field schema type="null"
+[warning] ModifyAssistantRequestResponseFormat.Variant2: unrecognised field schema type="null"
+[warning] ModifyAssistantRequestTemperature.Variant2: unrecognised field schema type="null"
+[warning] ModifyAssistantRequestToolResources.Variant2: unrecognised field schema type="null"
+[warning] ModifyAssistantRequestTopP.Variant2: unrecognised field schema type="null"
+[warning] ModifyThreadRequestToolResources.Variant2: unrecognised field schema type="null"
+[warning] MoveParamKeys.Variant2: unrecognised field schema type="null"
+[warning] OrganizationCertificateName.Variant2: unrecognised field schema type="null"
+[warning] OrganizationProjectCertificateName.Variant2: unrecognised field schema type="null"
+[warning] OutputMessagePhase.Variant2: unrecognised field schema type="null"
+[warning] PartialImages.Variant2: unrecognised field schema type="null"
+[warning] ProjectApiKeyLastUsedAt.Variant2: unrecognised field schema type="null"
+[warning] ProjectApiKeyListResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ProjectApiKeyListResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ProjectArchivedAt.Variant2: unrecognised field schema type="null"
+[warning] ProjectCreateRequestExternalKeyID.Variant2: unrecognised field schema type="null"
+[warning] ProjectCreateRequestGeography.Variant2: unrecognised field schema type="null"
+[warning] ProjectExternalKeyID.Variant2: unrecognised field schema type="null"
+[warning] ProjectGroupListResourceNext.Variant2: unrecognised field schema type="null"
+[warning] ProjectListResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ProjectListResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ProjectName.Variant2: unrecognised field schema type="null"
+[warning] ProjectRateLimitListResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ProjectRateLimitListResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ProjectServiceAccountCreateResponseAPIKey.Variant2: unrecognised field schema type="null"
+[warning] ProjectServiceAccountListResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ProjectServiceAccountListResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ProjectStatus.Variant2: unrecognised field schema type="null"
+[warning] ProjectUpdateRequestExternalKeyID.Variant2: unrecognised field schema type="null"
+[warning] ProjectUpdateRequestGeography.Variant2: unrecognised field schema type="null"
+[warning] ProjectUpdateRequestName.Variant2: unrecognised field schema type="null"
+[warning] ProjectUserCreateRequestEmail.Variant2: unrecognised field schema type="null"
+[warning] ProjectUserCreateRequestUserID.Variant2: unrecognised field schema type="null"
+[warning] ProjectUserEmail.Variant2: unrecognised field schema type="null"
+[warning] ProjectUserListResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] ProjectUserListResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] ProjectUserName.Variant2: unrecognised field schema type="null"
+[warning] ProjectUserUpdateRequestRole.Variant2: unrecognised field schema type="null"
+[warning] Prompt.Variant2: unrecognised field schema type="null"
+[warning] PromptVariant1Version.Variant2: unrecognised field schema type="null"
+[warning] PublicCreateOrganizationRoleBodyDescription.Variant2: unrecognised field schema type="null"
+[warning] PublicRoleListResourceNext.Variant2: unrecognised field schema type="null"
+[warning] PublicUpdateOrganizationRoleBodyDescription.Variant2: unrecognised field schema type="null"
+[warning] PublicUpdateOrganizationRoleBodyPermissions.Variant2: unrecognised field schema type="null"
+[warning] PublicUpdateOrganizationRoleBodyRoleName.Variant2: unrecognised field schema type="null"
+[warning] RealtimeBetaServerEventConversationItemCreatedPreviousItemID.Variant2: unrecognised field schema type="null"
+[warning] RealtimeBetaServerEventConversationItemInputAudioTranscriptionCompletedLogprobs.Variant2: unrecognised field schema type="null"
+[warning] RealtimeBetaServerEventConversationItemInputAudioTranscriptionDeltaLogprobs.Variant2: unrecognised field schema type="null"
+[warning] RealtimeBetaServerEventErrorErrorCode.Variant2: unrecognised field schema type="null"
+[warning] RealtimeBetaServerEventErrorErrorEventID.Variant2: unrecognised field schema type="null"
+[warning] RealtimeBetaServerEventErrorErrorParam.Variant2: unrecognised field schema type="null"
+[warning] RealtimeBetaServerEventInputAudioBufferCommittedPreviousItemID.Variant2: unrecognised field schema type="null"
+[warning] RealtimeBetaServerEventResponseMCPCallArgumentsDeltaObfuscation.Variant2: unrecognised field schema type="null"
+[warning] RealtimeMCPApprovalResponseReason.Variant2: unrecognised field schema type="null"
+[warning] RealtimeMCPToolCallApprovalRequestID.Variant2: unrecognised field schema type="null"
+[warning] RealtimeMCPToolCallError.Variant2: unrecognised field schema type="null"
+[warning] RealtimeMCPToolCallOutput.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventConversationItemAddedPreviousItemID.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventConversationItemCreatedPreviousItemID.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventConversationItemDonePreviousItemID.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventConversationItemInputAudioTranscriptionCompletedLogprobs.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventConversationItemInputAudioTranscriptionDeltaLogprobs.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventErrorErrorCode.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventErrorErrorEventID.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventErrorErrorParam.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventInputAudioBufferCommittedPreviousItemID.Variant2: unrecognised field schema type="null"
+[warning] RealtimeServerEventResponseMCPCallArgumentsDeltaObfuscation.Variant2: unrecognised field schema type="null"
+[warning] RealtimeSessionCreateResponseGATracing.Variant2: unrecognised field schema type="null"
+[warning] RealtimeSessionInclude.Variant2: unrecognised field schema type="null"
+[warning] RealtimeSessionInputAudioTranscription.Variant2: unrecognised field schema type="null"
+[warning] RealtimeSessionPrompt.Variant2: unrecognised field schema type="null"
+[warning] RealtimeSessionTracing.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranscriptionSessionCreateResponseGAAudioInputTurnDetection.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranslationServerEventSessionInputTranscriptDeltaElapsedMs.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranslationServerEventSessionOutputAudioDeltaElapsedMs.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranslationServerEventSessionOutputTranscriptDeltaElapsedMs.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranslationSessionAudioInputNoiseReduction.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranslationSessionAudioInputTranscription.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranslationSessionCreateRequestAudioInputNoiseReduction.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranslationSessionCreateRequestAudioInputTranscription.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranslationSessionUpdateRequestAudioInputNoiseReduction.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTranslationSessionUpdateRequestAudioInputTranscription.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTurnDetection.Variant2: unrecognised field schema type="null"
+[warning] RealtimeTurnDetectionVariant1Variant1IdleTimeoutMs.Variant2: unrecognised field schema type="null"
+[warning] ReasoningEffort.Variant2: unrecognised field schema type="null"
+[warning] ReasoningGenerateSummary.Variant2: unrecognised field schema type="null"
+[warning] ReasoningItemEncryptedContent.Variant2: unrecognised field schema type="null"
+[warning] ReasoningSummary.Variant2: unrecognised field schema type="null"
+[warning] ResponseCompletedAt.Variant2: unrecognised field schema type="null"
+[warning] ResponseConversation.Variant2: unrecognised field schema type="null"
+[warning] ResponseError.Variant2: unrecognised field schema type="null"
+[warning] ResponseErrorEventCode.Variant2: unrecognised field schema type="null"
+[warning] ResponseErrorEventParam.Variant2: unrecognised field schema type="null"
+[warning] ResponseFormatJsonSchemaJSONSchemaStrict.Variant2: unrecognised field schema type="null"
+[warning] ResponseIncompleteDetails.Variant2: unrecognised field schema type="null"
+[warning] ResponseInstructions.Variant2: unrecognised field schema type="null"
+[warning] ResponseMaxOutputTokens.Variant2: unrecognised field schema type="null"
+[warning] ResponseModalities.Variant2: unrecognised field schema type="null"
+[warning] ResponseOutputText2.Variant2: unrecognised field schema type="null"
+[warning] ResponsePromptVariables.Variant2: unrecognised field schema type="null"
+[warning] ResponsePropertiesBackground.Variant2: unrecognised field schema type="null"
+[warning] ResponsePropertiesMaxToolCalls.Variant2: unrecognised field schema type="null"
+[warning] ResponsePropertiesPreviousResponseID.Variant2: unrecognised field schema type="null"
+[warning] ResponsePropertiesReasoning.Variant2: unrecognised field schema type="null"
+[warning] ResponsePropertiesTruncation.Variant2: unrecognised field schema type="null"
+[warning] ResponseStreamOptions.Variant2: unrecognised field schema type="null"
+[warning] RoleDescription.Variant2: unrecognised field schema type="null"
+[warning] RoleListResourceNext.Variant2: unrecognised field schema type="null"
+[warning] RunCompletionUsage.Variant2: unrecognised field schema type="null"
+[warning] RunGraderResponse.ModelGraderTokenUsagePerModelValue: unrecognised field schema type=""
+[warning] RunGraderResponse.SubRewardsValue: unrecognised field schema type=""
+[warning] RunGraderResponseMetadata.ScoresValue: unrecognised field schema type=""
+[warning] RunGraderResponseMetadataErrorsModelGraderServerErrorDetails.Variant2: unrecognised field schema type="null"
+[warning] RunGraderResponseMetadataErrorsPythonGraderRuntimeErrorDetails.Variant2: unrecognised field schema type="null"
+[warning] RunGraderResponseMetadataErrorsPythonGraderServerErrorType.Variant2: unrecognised field schema type="null"
+[warning] RunGraderResponseMetadataSampledModelName.Variant2: unrecognised field schema type="null"
+[warning] RunGraderResponseMetadataTokenUsage.Variant2: unrecognised field schema type="null"
+[warning] RunStepCompletionUsage.Variant2: unrecognised field schema type="null"
+[warning] RunStepDeltaStepDetailsToolCallsFunctionObjectFunctionOutput.Variant2: unrecognised field schema type="null"
+[warning] RunStepDetailsToolCallsFunctionObjectFunctionOutput.Variant2: unrecognised field schema type="null"
+[warning] RunStepObjectCancelledAt.Variant2: unrecognised field schema type="null"
+[warning] RunStepObjectCompletedAt.Variant2: unrecognised field schema type="null"
+[warning] RunStepObjectExpiredAt.Variant2: unrecognised field schema type="null"
+[warning] RunStepObjectFailedAt.Variant2: unrecognised field schema type="null"
+[warning] RunStepObjectLastError.Variant2: unrecognised field schema type="null"
+[warning] ScrollParamKeys.Variant2: unrecognised field schema type="null"
+[warning] ServiceTier.Variant2: unrecognised field schema type="null"
+[warning] SkillListResourceFirstID.Variant2: unrecognised field schema type="null"
+[warning] SkillListResourceLastID.Variant2: unrecognised field schema type="null"
+[warning] SkillVersionListResourceFirstID.Variant2: unrecognised field schema type="null"
+[warning] SkillVersionListResourceLastID.Variant2: unrecognised field schema type="null"
+[warning] SubmitToolOutputsRunRequestStream.Variant2: unrecognised field schema type="null"
+[warning] TaskGroupTaskHeading.Variant2: unrecognised field schema type="null"
+[warning] TaskGroupTaskSummary.Variant2: unrecognised field schema type="null"
+[warning] TaskItemHeading.Variant2: unrecognised field schema type="null"
+[warning] TaskItemSummary.Variant2: unrecognised field schema type="null"
+[warning] TextResponseFormatJsonSchemaStrict.Variant2: unrecognised field schema type="null"
+[warning] ThreadItemListResourceFirstID.Variant2: unrecognised field schema type="null"
+[warning] ThreadItemListResourceLastID.Variant2: unrecognised field schema type="null"
+[warning] ThreadListResourceFirstID.Variant2: unrecognised field schema type="null"
+[warning] ThreadListResourceLastID.Variant2: unrecognised field schema type="null"
+[warning] ThreadObjectToolResources.Variant2: unrecognised field schema type="null"
+[warning] ThreadResourceTitle.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyConversation.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyInput.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyInstructions.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyModel.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyParallelToolCalls.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyPreviousResponseID.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyReasoning.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyText.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyToolChoice.Variant2: unrecognised field schema type="null"
+[warning] TokenCountsBodyTools.Variant2: unrecognised field schema type="null"
+[warning] ToolChoiceMCPName.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchCall.Arguments: unrecognised field schema type=""
+[warning] ToolSearchCallCallID.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchCallItemParamCallID.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchCallItemParamID.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchCallItemParamStatus.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchOutputCallID.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchOutputItemParamCallID.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchOutputItemParamID.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchOutputItemParamStatus.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchToolParamDescription.Variant2: unrecognised field schema type="null"
+[warning] ToolSearchToolParamParameters.Variant2: unrecognised field schema type="null"
+[warning] TruncationObjectLastMessages.Variant2: unrecognised field schema type="null"
+[warning] UsageAudioSpeechesResultAPIKeyID.Variant2: unrecognised field schema type="null"
+[warning] UsageAudioSpeechesResultModel.Variant2: unrecognised field schema type="null"
+[warning] UsageAudioSpeechesResultProjectID.Variant2: unrecognised field schema type="null"
+[warning] UsageAudioSpeechesResultUserID.Variant2: unrecognised field schema type="null"
+[warning] UsageAudioTranscriptionsResultAPIKeyID.Variant2: unrecognised field schema type="null"
+[warning] UsageAudioTranscriptionsResultModel.Variant2: unrecognised field schema type="null"
+[warning] UsageAudioTranscriptionsResultProjectID.Variant2: unrecognised field schema type="null"
+[warning] UsageAudioTranscriptionsResultUserID.Variant2: unrecognised field schema type="null"
+[warning] UsageCodeInterpreterSessionsResultProjectID.Variant2: unrecognised field schema type="null"
+[warning] UsageCompletionsResultAPIKeyID.Variant2: unrecognised field schema type="null"
+[warning] UsageCompletionsResultBatch.Variant2: unrecognised field schema type="null"
+[warning] UsageCompletionsResultModel.Variant2: unrecognised field schema type="null"
+[warning] UsageCompletionsResultProjectID.Variant2: unrecognised field schema type="null"
+[warning] UsageCompletionsResultServiceTier.Variant2: unrecognised field schema type="null"
+[warning] UsageCompletionsResultUserID.Variant2: unrecognised field schema type="null"
+[warning] UsageEmbeddingsResultAPIKeyID.Variant2: unrecognised field schema type="null"
+[warning] UsageEmbeddingsResultModel.Variant2: unrecognised field schema type="null"
+[warning] UsageEmbeddingsResultProjectID.Variant2: unrecognised field schema type="null"
+[warning] UsageEmbeddingsResultUserID.Variant2: unrecognised field schema type="null"
+[warning] UsageImagesResultAPIKeyID.Variant2: unrecognised field schema type="null"
+[warning] UsageImagesResultModel.Variant2: unrecognised field schema type="null"
+[warning] UsageImagesResultProjectID.Variant2: unrecognised field schema type="null"
+[warning] UsageImagesResultSize.Variant2: unrecognised field schema type="null"
+[warning] UsageImagesResultSource.Variant2: unrecognised field schema type="null"
+[warning] UsageImagesResultUserID.Variant2: unrecognised field schema type="null"
+[warning] UsageModerationsResultAPIKeyID.Variant2: unrecognised field schema type="null"
+[warning] UsageModerationsResultModel.Variant2: unrecognised field schema type="null"
+[warning] UsageModerationsResultProjectID.Variant2: unrecognised field schema type="null"
+[warning] UsageModerationsResultUserID.Variant2: unrecognised field schema type="null"
+[warning] UsageResponseNextPage.Variant2: unrecognised field schema type="null"
+[warning] UsageVectorStoresResultProjectID.Variant2: unrecognised field schema type="null"
+[warning] UserAPIKeyLastUsedAt.Variant2: unrecognised field schema type="null"
+[warning] UserDeveloperPersona.Variant2: unrecognised field schema type="null"
+[warning] UserEmail.Variant2: unrecognised field schema type="null"
+[warning] UserIsScaleTierAuthorizedPurchaser.Variant2: unrecognised field schema type="null"
+[warning] UserListResourceNext.Variant2: unrecognised field schema type="null"
+[warning] UserListResponseFirstID.Variant2: unrecognised field schema type="null"
+[warning] UserListResponseLastID.Variant2: unrecognised field schema type="null"
+[warning] UserMessageItemInferenceOptions.Variant2: unrecognised field schema type="null"
+[warning] UserName.Variant2: unrecognised field schema type="null"
+[warning] UserProjects.Variant2: unrecognised field schema type="null"
+[warning] UserProjectsVariant1DataItemID.Variant2: unrecognised field schema type="null"
+[warning] UserProjectsVariant1DataItemName.Variant2: unrecognised field schema type="null"
+[warning] UserProjectsVariant1DataItemRole.Variant2: unrecognised field schema type="null"
+[warning] UserRole.Variant2: unrecognised field schema type="null"
+[warning] UserRoleUpdateRequestDeveloperPersona.Variant2: unrecognised field schema type="null"
+[warning] UserRoleUpdateRequestRole.Variant2: unrecognised field schema type="null"
+[warning] UserRoleUpdateRequestRoleID.Variant2: unrecognised field schema type="null"
+[warning] UserRoleUpdateRequestTechnicalLevel.Variant2: unrecognised field schema type="null"
+[warning] UserTechnicalLevel.Variant2: unrecognised field schema type="null"
+[warning] UserUserBanned.Variant2: unrecognised field schema type="null"
+[warning] UserUserBannedAt.Variant2: unrecognised field schema type="null"
+[warning] UserUserEmail.Variant2: unrecognised field schema type="null"
+[warning] UserUserEnabled.Variant2: unrecognised field schema type="null"
+[warning] UserUserName.Variant2: unrecognised field schema type="null"
+[warning] UserUserPicture.Variant2: unrecognised field schema type="null"
+[warning] VectorStoreFileAttributes.Variant2: unrecognised field schema type="null"
+[warning] VectorStoreFileContentResponseNextPage.Variant2: unrecognised field schema type="null"
+[warning] VectorStoreFileObjectLastError.Variant2: unrecognised field schema type="null"
+[warning] VectorStoreObjectExpiresAt.Variant2: unrecognised field schema type="null"
+[warning] VectorStoreObjectLastActiveAt.Variant2: unrecognised field schema type="null"
+[warning] VectorStoreSearchResultsPageNextPage.Variant2: unrecognised field schema type="null"
+[warning] Verbosity.Variant2: unrecognised field schema type="null"
+[warning] VideoCharacterResourceID.Variant2: unrecognised field schema type="null"
+[warning] VideoCharacterResourceName.Variant2: unrecognised field schema type="null"
+[warning] VideoListResourceFirstID.Variant2: unrecognised field schema type="null"
+[warning] VideoListResourceLastID.Variant2: unrecognised field schema type="null"
+[warning] VideoResourceCompletedAt.Variant2: unrecognised field schema type="null"
+[warning] VideoResourceError.Variant2: unrecognised field schema type="null"
+[warning] VideoResourceExpiresAt.Variant2: unrecognised field schema type="null"
+[warning] VideoResourcePrompt.Variant2: unrecognised field schema type="null"
+[warning] VideoResourceRemixedFromVideoID.Variant2: unrecognised field schema type="null"
+[warning] VoiceConsentListResourceFirstID.Variant2: unrecognised field schema type="null"
+[warning] VoiceConsentListResourceLastID.Variant2: unrecognised field schema type="null"
+[warning] WebSearchActionOpenPageURL.Variant2: unrecognised field schema type="null"
+[warning] WebSearchApproximateLocation.Variant2: unrecognised field schema type="null"
+[warning] WebSearchApproximateLocationVariant1City.Variant2: unrecognised field schema type="null"
+[warning] WebSearchApproximateLocationVariant1Country.Variant2: unrecognised field schema type="null"
+[warning] WebSearchApproximateLocationVariant1Region.Variant2: unrecognised field schema type="null"
+[warning] WebSearchApproximateLocationVariant1Timezone.Variant2: unrecognised field schema type="null"
+[warning] WebSearchPreviewToolUserLocation.Variant2: unrecognised field schema type="null"
+[warning] WebSearchToolFilters.Variant2: unrecognised field schema type="null"
+[warning] WebSearchToolFiltersVariant1AllowedDomains.Variant2: unrecognised field schema type="null"
+[warning] addUploadPart: multipart/form-data request body skipped (not in v1 scope)
+[warning] components/schemas/AdminApiKey.LastUsedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AdminApiKey.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApiKeyList.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApiKeyList.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApplyPatchToolCallItemParam.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApplyPatchToolCallOutput.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApplyPatchToolCallOutputItemParam.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApplyPatchToolCallOutputItemParam.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApproximateLocation.City: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApproximateLocation.Country: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApproximateLocation.Region: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ApproximateLocation.Timezone: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssignedRoleDetails.CreatedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssignedRoleDetails.CreatedBy: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssignedRoleDetails.CreatedByUserObj: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssignedRoleDetails.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssignedRoleDetails.Metadata: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssignedRoleDetails.UpdatedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssistantObject.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssistantObject.Instructions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssistantObject.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssistantObject.ResponseFormat: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssistantObject.Temperature: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssistantObject.ToolResources: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AssistantObject.TopP: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Attachment.PreviewURL: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AudioTranscription.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AudioTranscriptionResponse.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AuditLog.Actor: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/AutoCodeInterpreterToolParam.MemoryLimit: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/BatchErrorsDataItem.Line: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/BatchErrorsDataItem.Param: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Certificate.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionMessageListDataItem.ContentParts: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionModalities: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestAssistantMessage.Audio: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestAssistantMessage.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestAssistantMessage.FunctionCall: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestAssistantMessage.Refusal: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestAssistantMessageContent.Variant1: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestDeveloperMessage.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestFunctionMessage.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestSystemMessage.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestToolMessage.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionRequestUserMessage.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionResponseMessage.Audio: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionResponseMessage.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionResponseMessage.Refusal: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionStreamOptions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionStreamResponseDelta.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionStreamResponseDelta.Refusal: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionTokenLogprob.Bytes: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatCompletionTokenLogprobTopLogprobsItem.Bytes: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatSessionFileUpload.MaxFileSize: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatSessionFileUpload.MaxFiles: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatSessionHistory.RecentThreads: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatkitWorkflow.StateVariables: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatkitWorkflow.Version: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ChatkitWorkflowStateVariables.Variant1Value: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ClickParam.Keys: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ClientToolCallItem.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ClosedStatus.Reason: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CodeInterpreterTool.Container: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CodeInterpreterToolCall.Code: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CodeInterpreterToolCall.Outputs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CompactResponseMethodPublicBody.Input: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CompactResponseMethodPublicBody.Instructions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CompactResponseMethodPublicBody.PreviousResponseID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CompactResponseMethodPublicBody.PromptCacheKey: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CompactResponseMethodPublicBody.PromptCacheRetention: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CompactResponseMethodPublicBody.ServiceTier: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CompactResponseMethodPublicBodyInput.Variant1: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CompactionSummaryItemParam.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ComparisonFilter.Value: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ComparisonFilterValue.Variant4Item: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CompoundFilter.FiltersItem: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ComputerCallOutputItemParam.AcknowledgedSafetyChecks: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ComputerCallOutputItemParam.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ComputerCallOutputItemParam.Status: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ComputerCallSafetyCheckParam.Code: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ComputerCallSafetyCheckParam.Message: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ComputerScreenshotContent.FileID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ComputerScreenshotContent.ImageURL: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ContainerAutoParam.MemoryLimit: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ContextManagementParam.CompactThreshold: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ConversationParam: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CostsResult.APIKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CostsResult.LineItem: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CostsResult.ProjectID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CostsResult.Quantity: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateAssistantRequest.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateAssistantRequest.Instructions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateAssistantRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateAssistantRequest.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateAssistantRequest.ResponseFormat: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateAssistantRequest.Temperature: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateAssistantRequest.ToolResources: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateAssistantRequest.TopP: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateAssistantRequestToolResourcesVariant1.FileSearch: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateChatCompletionResponseChoicesItem.Logprobs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateChatCompletionResponseChoicesItemLogprobsVariant1.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateChatCompletionResponseChoicesItemLogprobsVariant1.Refusal: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateCompletionRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateCompletionRequest.Prompt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateCompletionResponseChoicesItem.Logprobs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateConversationBody.Items: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateConversationBody.Metadata: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateEmbeddingRequest.Input: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateEmbeddingRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateFineTuningJobRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateFineTuningJobRequestHyperparameters.BatchSize: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateFineTuningJobRequestHyperparameters.LearningRateMultiplier: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateFineTuningJobRequestHyperparameters.NEpochs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateImageEditRequest.Image: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateImageEditRequest.InputFidelity: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateImageEditRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateImageEditRequest.Size: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateImageRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateImageRequest.Size: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateImageVariationRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateMessageRequest.Attachments: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateMessageRequest.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateModerationRequest.Input: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateModerationRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateModerationResponseResultsItemCategories.Illicit: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateModerationResponseResultsItemCategories.IllicitViolent: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateResponse.ContextManagement: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateResponse.Conversation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateResponse.Include: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateResponse.Instructions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateResponse.MaxOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateResponse.ParallelToolCalls: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateResponse.Store: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateResponse.Stream: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateRunRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateSkillBody.Files: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateSkillVersionBody.Files: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateSpeechRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateThreadAndRunRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateThreadRequest.ToolResources: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateThreadRequestToolResourcesVariant1.FileSearch: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateTranscriptionRequest.ChunkingStrategy: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateTranscriptionRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateTranscriptionRequest.Stream: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateTranslationRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateVectorStoreFileBatchRequest: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateVideoEditMultipartBody.Video: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateVideoExtendMultipartBody.Video: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CreateVideoMultipartBody.InputReference: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/CustomToolCallOutput.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/DoubleClickAction.Keys: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/DragParam.Keys: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EasyInputMessage.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EasyInputMessage.Phase: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.Background: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.InputFidelity: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.Moderation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.N: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.OutputCompression: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.OutputFormat: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.Quality: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.Size: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EditImageBodyJsonParam.Stream: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Error.Code: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Error.Param: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.CreatedAfter: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.CreatedBefore: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.InstructionsSearch: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.Metadata: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.ReasoningEffort: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.Temperature: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.Tools: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.TopP: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalResponsesSource.Users: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalRunOutputItemResult.Sample: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalStoredCompletionsSource.CreatedAfter: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalStoredCompletionsSource.CreatedBefore: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalStoredCompletionsSource.Limit: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/EvalStoredCompletionsSource.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FileSearchTool.Filters: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FileSearchToolCall.Results: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneDPOHyperparameters.BatchSize: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneDPOHyperparameters.Beta: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneDPOHyperparameters.LearningRateMultiplier: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneDPOHyperparameters.NEpochs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneReinforcementHyperparameters.BatchSize: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneReinforcementHyperparameters.ComputeMultiplier: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneReinforcementHyperparameters.EvalInterval: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneReinforcementHyperparameters.EvalSamples: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneReinforcementHyperparameters.LearningRateMultiplier: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneReinforcementHyperparameters.NEpochs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneSupervisedHyperparameters.BatchSize: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneSupervisedHyperparameters.LearningRateMultiplier: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuneSupervisedHyperparameters.NEpochs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningIntegrationWandb.Entity: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningIntegrationWandb.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJob.Error: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJob.EstimatedFinish: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJob.FineTunedModel: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJob.FinishedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJob.Integrations: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJob.TrainedTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJob.ValidationFile: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJobErrorVariant1.Param: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJobHyperparameters.BatchSize: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJobHyperparameters.LearningRateMultiplier: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJobHyperparameters.NEpochs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FineTuningJobHyperparametersBatchSize.Variant1: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionCallOutputItemParam.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionCallOutputItemParam.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionCallOutputItemParam.Status: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionObject.Strict: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellAction.MaxOutputLength: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellAction.TimeoutMs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellActionParam.MaxOutputLength: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellActionParam.TimeoutMs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellCall.Environment: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellCallItemParam.Environment: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellCallItemParam.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellCallItemParam.Status: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellCallOutput.MaxOutputLength: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellCallOutputItemParam.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellCallOutputItemParam.MaxOutputLength: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellCallOutputItemParam.Status: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionShellToolParam.Environment: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionTool.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionTool.Parameters: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionTool.Strict: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionToolCallOutput.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionToolParam.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionToolParam.Parameters: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/FunctionToolParam.Strict: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/GraderScoreModelSamplingParams.MaxCompletionsTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/GraderScoreModelSamplingParams.Seed: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/GraderScoreModelSamplingParams.Temperature: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/GraderScoreModelSamplingParams.TopP: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/GroupListResource.Next: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/GroupUser.Email: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ImageGenTool.InputFidelity: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ImageGenTool.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ImageGenTool.Size: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ImageGenToolCall.Result: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ImageRefParam: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InferenceOptions.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InferenceOptions.ToolChoice: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputFileContent.FileID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputFileContentParam.FileData: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputFileContentParam.FileID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputFileContentParam.FileURL: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputFileContentParam.Filename: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputImageContent.FileID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputImageContent.ImageURL: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputImageContentParamAutoParam.Detail: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputImageContentParamAutoParam.FileID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputImageContentParamAutoParam.ImageURL: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InputParam: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Invite.AcceptedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Invite.ExpiresAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InviteListResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/InviteListResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ItemReferenceParam.Type: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListAuditLogsResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListAuditLogsResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListCertificatesResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListCertificatesResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListFineTuningCheckpointPermissionResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListFineTuningCheckpointPermissionResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListFineTuningJobCheckpointsResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListFineTuningJobCheckpointsResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListProjectCertificatesResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ListProjectCertificatesResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/LocalShellExecAction.TimeoutMs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/LocalShellExecAction.User: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/LocalShellExecAction.WorkingDirectory: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/LocalShellToolCallOutput.Status: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/LockedStatus.Reason: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPApprovalResponse.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPApprovalResponse.Reason: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPApprovalResponseResource.Reason: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPListTools.Error: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPListToolsTool.Annotations: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPListToolsTool.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPTool.AllowedTools: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPTool.Headers: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPTool.RequireApproval: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPToolCall.ApprovalRequestID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPToolCall.Error: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MCPToolCall.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Message.Phase: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MessageObject.AssistantID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MessageObject.Attachments: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MessageObject.CompletedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MessageObject.IncompleteAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MessageObject.IncompleteDetails: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MessageObject.RunID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Metadata: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModelIdsCompaction: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModelIdsShared: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModelResponseProperties.PromptCacheRetention: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModelResponseProperties.Temperature: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModelResponseProperties.TopLogprobs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModelResponseProperties.TopP: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModifyAssistantRequest.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModifyAssistantRequest.Instructions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModifyAssistantRequest.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModifyAssistantRequest.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModifyAssistantRequest.ResponseFormat: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModifyAssistantRequest.Temperature: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModifyAssistantRequest.ToolResources: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModifyAssistantRequest.TopP: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ModifyThreadRequest.ToolResources: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/MoveParam.Keys: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/OrganizationCertificate.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/OrganizationProjectCertificate.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/OutputMessage.Phase: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/PartialImages: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/PredictionContent.Content: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Project.ArchivedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Project.ExternalKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Project.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Project.Status: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectApiKey.LastUsedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectApiKeyListResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectApiKeyListResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectCreateRequest.ExternalKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectCreateRequest.Geography: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectGroupListResource.Next: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectListResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectListResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectRateLimitListResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectRateLimitListResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectServiceAccountCreateResponse.APIKey: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectServiceAccountListResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectServiceAccountListResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUpdateRequest.ExternalKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUpdateRequest.Geography: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUpdateRequest.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUser.Email: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUser.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUserCreateRequest.Email: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUserCreateRequest.UserID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUserListResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUserListResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ProjectUserUpdateRequest.Role: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Prompt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/PromptVariant1.Version: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/PublicCreateOrganizationRoleBody.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/PublicRoleListResource.Next: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/PublicUpdateOrganizationRoleBody.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/PublicUpdateOrganizationRoleBody.Permissions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/PublicUpdateOrganizationRoleBody.RoleName: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaResponse.MaxOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaResponseCreateParams.Conversation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaResponseCreateParams.MaxOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaServerEventConversationItemCreated.PreviousItemID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaServerEventConversationItemInputAudioTranscriptionCompleted.Logprobs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaServerEventConversationItemInputAudioTranscriptionDelta.Logprobs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaServerEventErrorError.Code: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaServerEventErrorError.EventID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaServerEventErrorError.Param: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaServerEventInputAudioBufferCommitted.PreviousItemID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeBetaServerEventResponseMCPCallArgumentsDelta.Obfuscation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeMCPApprovalResponse.Reason: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeMCPToolCall.ApprovalRequestID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeMCPToolCall.Error: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeMCPToolCall.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeResponse.MaxOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeResponseCreateParams.Conversation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeResponseCreateParams.MaxOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventConversationItemAdded.PreviousItemID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventConversationItemCreated.PreviousItemID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventConversationItemDone.PreviousItemID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventConversationItemInputAudioTranscriptionCompleted.Logprobs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventConversationItemInputAudioTranscriptionDelta.Logprobs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventErrorError.Code: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventErrorError.EventID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventErrorError.Param: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventInputAudioBufferCommitted.PreviousItemID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeServerEventResponseMCPCallArgumentsDelta.Obfuscation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSession.Include: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSession.InputAudioTranscription: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSession.MaxResponseOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSession.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSession.Prompt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSession.Tracing: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSessionCreateRequest.MaxResponseOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSessionCreateRequestGA.MaxOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSessionCreateRequestGA.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSessionCreateResponse.MaxOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSessionCreateResponseGA.MaxOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSessionCreateResponseGA.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeSessionCreateResponseGA.Tracing: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranscriptionSessionCreateResponseGAAudioInput.TurnDetection: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranslationServerEventSessionInputTranscriptDelta.ElapsedMs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranslationServerEventSessionOutputAudioDelta.ElapsedMs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranslationServerEventSessionOutputTranscriptDelta.ElapsedMs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranslationSessionAudioInput.NoiseReduction: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranslationSessionAudioInput.Transcription: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranslationSessionCreateRequestAudioInput.NoiseReduction: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranslationSessionCreateRequestAudioInput.Transcription: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranslationSessionUpdateRequestAudioInput.NoiseReduction: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTranslationSessionUpdateRequestAudioInput.Transcription: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTurnDetection: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RealtimeTurnDetectionVariant1Variant1.IdleTimeoutMs: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Reasoning.GenerateSummary: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Reasoning.Summary: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ReasoningEffort: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ReasoningItem.EncryptedContent: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Response.CompletedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Response.Conversation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Response.IncompleteDetails: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Response.Instructions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Response.MaxOutputTokens: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Response.OutputText: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseError: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseErrorEvent.Code: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseErrorEvent.Param: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseFormatJsonSchemaJSONSchema.Strict: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseInstructions.Variant1: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseModalities: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponsePromptVariables.Variant1Value: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponsePromptVariables: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseProperties.Background: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseProperties.MaxToolCalls: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseProperties.PreviousResponseID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseProperties.Reasoning: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseProperties.Truncation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ResponseStreamOptions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Role.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RoleListResource.Next: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunCompletionUsage: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunGraderResponseMetadata.SampledModelName: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunGraderResponseMetadata.TokenUsage: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunGraderResponseMetadataErrors.ModelGraderServerErrorDetails: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunGraderResponseMetadataErrors.PythonGraderRuntimeErrorDetails: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunGraderResponseMetadataErrors.PythonGraderServerErrorType: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunStepCompletionUsage: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunStepDeltaStepDetailsToolCallsFunctionObjectFunction.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunStepDetailsToolCallsFunctionObjectFunction.Output: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunStepObject.CancelledAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunStepObject.CompletedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunStepObject.ExpiredAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunStepObject.FailedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/RunStepObject.LastError: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ScrollParam.Keys: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ServiceTier: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/SkillListResource.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/SkillListResource.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/SkillVersionListResource.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/SkillVersionListResource.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/StopConfiguration: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/SubmitToolOutputsRunRequest.Stream: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TaskGroupTask.Heading: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TaskGroupTask.Summary: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TaskItem.Heading: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TaskItem.Summary: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TextResponseFormatJsonSchema.Strict: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ThreadItemListResource.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ThreadItemListResource.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ThreadListResource.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ThreadListResource.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ThreadObject.ToolResources: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ThreadResource.Title: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.Conversation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.Input: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.Instructions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.ParallelToolCalls: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.PreviousResponseID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.Reasoning: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.Text: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.ToolChoice: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBody.Tools: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TokenCountsBodyInput.Variant1: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolChoiceMCP.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchCall.CallID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchCallItemParam.CallID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchCallItemParam.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchCallItemParam.Status: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchOutput.CallID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchOutputItemParam.CallID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchOutputItemParam.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchOutputItemParam.Status: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchToolParam.Description: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/ToolSearchToolParam.Parameters: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/TruncationObject.LastMessages: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageAudioSpeechesResult.APIKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageAudioSpeechesResult.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageAudioSpeechesResult.ProjectID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageAudioSpeechesResult.UserID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageAudioTranscriptionsResult.APIKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageAudioTranscriptionsResult.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageAudioTranscriptionsResult.ProjectID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageAudioTranscriptionsResult.UserID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageCodeInterpreterSessionsResult.ProjectID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageCompletionsResult.APIKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageCompletionsResult.Batch: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageCompletionsResult.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageCompletionsResult.ProjectID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageCompletionsResult.ServiceTier: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageCompletionsResult.UserID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageEmbeddingsResult.APIKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageEmbeddingsResult.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageEmbeddingsResult.ProjectID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageEmbeddingsResult.UserID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageImagesResult.APIKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageImagesResult.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageImagesResult.ProjectID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageImagesResult.Size: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageImagesResult.Source: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageImagesResult.UserID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageModerationsResult.APIKeyID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageModerationsResult.Model: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageModerationsResult.ProjectID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageModerationsResult.UserID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageResponse.NextPage: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UsageVectorStoresResult.ProjectID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/User.APIKeyLastUsedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/User.DeveloperPersona: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/User.Email: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/User.IsScaleTierAuthorizedPurchaser: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/User.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/User.Projects: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/User.Role: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/User.TechnicalLevel: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserListResource.Next: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserListResponse.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserListResponse.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserMessageItem.InferenceOptions: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserProjectsVariant1DataItem.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserProjectsVariant1DataItem.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserProjectsVariant1DataItem.Role: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserRoleUpdateRequest.DeveloperPersona: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserRoleUpdateRequest.Role: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserRoleUpdateRequest.RoleID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserRoleUpdateRequest.TechnicalLevel: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserUser.Banned: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserUser.BannedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserUser.Email: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserUser.Enabled: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserUser.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/UserUser.Picture: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VectorStoreFileAttributes.Variant1Value: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VectorStoreFileAttributes: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VectorStoreFileContentResponse.NextPage: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VectorStoreFileObject.LastError: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VectorStoreObject.ExpiresAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VectorStoreObject.LastActiveAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VectorStoreSearchRequest.Query: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VectorStoreSearchResultsPage.NextPage: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/Verbosity: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoCharacterResource.ID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoCharacterResource.Name: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoListResource.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoListResource.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoModel: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoResource.CompletedAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoResource.Error: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoResource.ExpiresAt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoResource.Prompt: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VideoResource.RemixedFromVideoID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VoiceConsentListResource.FirstID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VoiceConsentListResource.LastID: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/VoiceIdsShared: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WebSearchActionOpenPage.URL: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WebSearchApproximateLocation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WebSearchApproximateLocationVariant1.City: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WebSearchApproximateLocationVariant1.Country: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WebSearchApproximateLocationVariant1.Region: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WebSearchApproximateLocationVariant1.Timezone: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WebSearchPreviewTool.UserLocation: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WebSearchTool.Filters: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WebSearchToolFiltersVariant1.AllowedDomains: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] components/schemas/WorkflowParam.StateVariablesValue: oneOf/anyOf contains primitive variants; Strategy A fallback (any field) will be used — see plan §5
+[warning] create-realtime-call: multipart/form-data request body skipped (not in v1 scope)
+[warning] createChatCompletion: SSE (text/event-stream) response skipped (not in v1 scope)
+[warning] createFile: multipart/form-data request body skipped (not in v1 scope)
+[warning] createImage: SSE (text/event-stream) response skipped (not in v1 scope)
+[warning] createImageEdit: SSE (text/event-stream) response skipped (not in v1 scope)
+[warning] createImageVariation: multipart/form-data request body skipped (not in v1 scope)
+[warning] createResponse: SSE (text/event-stream) response skipped (not in v1 scope)
+[warning] createSpeech: SSE (text/event-stream) response skipped (not in v1 scope)
+[warning] createTranscription: SSE (text/event-stream) response skipped (not in v1 scope)
+[warning] createTranscription: multipart/form-data request body skipped (not in v1 scope)
+[warning] createTranslation: multipart/form-data request body skipped (not in v1 scope)
+[warning] createVoice: multipart/form-data request body skipped (not in v1 scope)
+[warning] createVoiceConsent: multipart/form-data request body skipped (not in v1 scope)
