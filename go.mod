@@ -6,7 +6,7 @@ require (
 	github.com/go-json-experiment/json v0.0.0-20260520185125-572e7c383686
 	github.com/google/go-cmp v0.7.0
 	github.com/pb33f/libopenapi v0.37.2
-	go.yaml.in/yaml/v4 v4.0.0-rc.4
+	go.yaml.in/yaml/v4 v4.0.0-rc.4.0.20260527182019-79b4713afbd4
 )
 
 require (
