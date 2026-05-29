@@ -45,6 +45,8 @@ func testdataPath(t *testing.T, elem ...string) string {
 	return filepath.Join(parts...)
 }
 
+// TestLoad verifies Load parses OpenAPI 3 specs (YAML and JSON) and reports
+// clear errors for Swagger 2.0, missing files, and malformed input.
 func TestLoad(t *testing.T) {
 	t.Parallel()
 

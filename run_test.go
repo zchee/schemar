@@ -39,6 +39,8 @@ var expectedFiles = []string{
 	"methods.go",
 }
 
+// TestRun_Generate_GoogleYAML verifies that Run("generate") with a YAML OpenAPI spec produces
+// all expected output files with non-zero size.
 func TestRun_Generate_GoogleYAML(t *testing.T) {
 	t.Parallel()
 	outDir := t.TempDir()
@@ -62,6 +64,8 @@ func TestRun_Generate_GoogleYAML(t *testing.T) {
 	}
 }
 
+// TestRun_Generate_GoogleJSON verifies that Run("generate") with a JSON OpenAPI spec produces
+// all expected output files without error.
 func TestRun_Generate_GoogleJSON(t *testing.T) {
 	t.Parallel()
 	outDir := t.TempDir()
@@ -79,6 +83,7 @@ func TestRun_Generate_GoogleJSON(t *testing.T) {
 	}
 }
 
+// TestRun_MissingInput verifies that Run("generate") with no --input flag returns a non-zero exit code.
 func TestRun_MissingInput(t *testing.T) {
 	t.Parallel()
 	exitCode := schemar.Run([]string{"generate"})
@@ -87,6 +92,7 @@ func TestRun_MissingInput(t *testing.T) {
 	}
 }
 
+// TestRun_BadInput verifies that Run("generate") with a nonexistent input file path returns a non-zero exit code.
 func TestRun_BadInput(t *testing.T) {
 	t.Parallel()
 	exitCode := schemar.Run([]string{"generate", "--input", "/nonexistent/spec.yaml", "--output", t.TempDir()})
@@ -95,6 +101,7 @@ func TestRun_BadInput(t *testing.T) {
 	}
 }
 
+// TestRun_Version verifies that Run("version") exits with code 0.
 func TestRun_Version(t *testing.T) {
 	t.Parallel()
 	exitCode := schemar.Run([]string{"version"})

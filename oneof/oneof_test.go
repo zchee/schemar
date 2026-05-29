@@ -144,6 +144,9 @@ func (u *trialDecodeUnion) UnmarshalJSON(b []byte) error {
 
 // ── Classify tests ────────────────────────────────────────────────────────
 
+// TestClassify verifies that Classify assigns StrategyB when all variants are
+// object references and StrategyA when any variant is a primitive JSON type,
+// and that IsOneOf and Discriminator are passed through unchanged.
 func TestClassify(t *testing.T) {
 	t.Parallel()
 
@@ -239,6 +242,10 @@ func TestStrategyADiagnostic(t *testing.T) {
 
 // ── MatchDiscriminator tests ──────────────────────────────────────────────
 
+// TestMatchDiscriminator verifies that MatchDiscriminator returns the correct
+// variant index when the discriminator field is present and its value is in the
+// candidate list, returns -1 with no error when the field is absent, and returns
+// [oneof.ErrNoVariantMatched] when the field is present but the value is unknown.
 func TestMatchDiscriminator(t *testing.T) {
 	t.Parallel()
 
@@ -328,6 +335,10 @@ func TestMatchDiscriminator(t *testing.T) {
 
 // ── Strategy B discriminated union tests ─────────────────────────────────
 
+// TestDiscriminatedUnion_Unmarshal verifies that a Strategy B discriminated
+// union routes JSON to the correct typed field when the discriminator matches a
+// known variant, and retains the raw bytes when the discriminator field is
+// absent or holds an unrecognized value.
 func TestDiscriminatedUnion_Unmarshal(t *testing.T) {
 	t.Parallel()
 
@@ -378,6 +389,9 @@ func TestDiscriminatedUnion_Unmarshal(t *testing.T) {
 	}
 }
 
+// TestDiscriminatedUnion_Marshal verifies that marshaling a discriminated union
+// emits the active variant's own field set, and that a union holding only raw
+// bytes passes those bytes through unchanged.
 func TestDiscriminatedUnion_Marshal(t *testing.T) {
 	t.Parallel()
 
@@ -420,6 +434,9 @@ func TestDiscriminatedUnion_Marshal(t *testing.T) {
 
 // ── Strategy B trial-decode union tests ──────────────────────────────────
 
+// TestTrialDecodeUnion_Unmarshal verifies that a Strategy B trial-decode union
+// selects the first variant whose strict decoder accepts the input, and retains
+// the raw bytes when every strict decoder rejects the object.
 func TestTrialDecodeUnion_Unmarshal(t *testing.T) {
 	t.Parallel()
 

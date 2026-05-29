@@ -172,6 +172,16 @@ func primaryResponseType(responses map[int]*ir.TypeRef) *ir.TypeRef {
 	return responses[codes[0]]
 }
 
+// returnedByValue reports whether a response of type t is returned by value
+// rather than by pointer. Slice and map types are returned directly; all other
+// named types are returned as a pointer.
+func returnedByValue(t *ir.TypeRef) bool {
+	if t == nil {
+		return false
+	}
+	return strings.HasPrefix(t.Name, "[]") || strings.HasPrefix(t.Name, "map[")
+}
+
 // ── Method declaration rendering ────────────────────────────────────────────
 
 // renderMethodDecl generates the full Go source for one API operation method.
@@ -203,9 +213,16 @@ func renderMethodDecl(op ir.Operation) (string, error) {
 		fmt.Fprintf(&b, ", body *%s", op.RequestBody.Name)
 	}
 
-	if respType == nil {
+	// A slice or map response is returned by value; all other named types are
+	// returned by pointer.
+	respByValue := returnedByValue(respType)
+
+	switch {
+	case respType == nil:
 		fmt.Fprint(&b, ") (*http.Response, error) {\n")
-	} else {
+	case respByValue:
+		fmt.Fprintf(&b, ") (%s, error) {\n", respType.Name)
+	default:
 		fmt.Fprintf(&b, ") (*%s, error) {\n", respType.Name)
 	}
 
@@ -246,7 +263,11 @@ func renderMethodDecl(op ir.Operation) (string, error) {
 		fmt.Fprintf(&b, "\tif _, err := c.do(ctx, %q, path, %s, %s, &out); err != nil {\n", op.Method, queryArg, bodyArg)
 		fmt.Fprint(&b, "\t\treturn nil, err\n")
 		fmt.Fprint(&b, "\t}\n")
-		fmt.Fprint(&b, "\treturn &out, nil\n")
+		if respByValue {
+			fmt.Fprint(&b, "\treturn out, nil\n")
+		} else {
+			fmt.Fprint(&b, "\treturn &out, nil\n")
+		}
 	}
 
 	fmt.Fprint(&b, "}\n")

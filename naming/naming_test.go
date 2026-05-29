@@ -22,6 +22,8 @@ import (
 	"github.com/zchee/schemar/naming"
 )
 
+// TestGoExported verifies GoExported converts identifiers to exported PascalCase,
+// covering separators, initialisms, idempotence, and digit-prefixed edge cases.
 func TestGoExported(t *testing.T) {
 	t.Parallel()
 
@@ -140,6 +142,8 @@ func TestGoExported(t *testing.T) {
 	}
 }
 
+// TestGoField verifies GoField applies the GoExported conversion to struct field
+// names, confirming the shared contract for field-name use cases.
 func TestGoField(t *testing.T) {
 	t.Parallel()
 
@@ -171,6 +175,8 @@ func TestGoField(t *testing.T) {
 	}
 }
 
+// TestGoPackageName verifies GoPackageName lowercases input and strips separators
+// to produce a valid package identifier, falling back to apiclient when empty.
 func TestGoPackageName(t *testing.T) {
 	t.Parallel()
 

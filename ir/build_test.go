@@ -90,6 +90,9 @@ func findOp(irr *ir.IR, goName string) *ir.Operation {
 // Primitive + format mapping
 // ---------------------------------------------------------------------------
 
+// TestBuild_PrimitiveTypes verifies that OpenAPI scalar types and their format
+// variants (date-time → [time.Time], byte → []byte, int32, float32, etc.) are
+// mapped to the correct Go alias target and Kind.
 func TestBuild_PrimitiveTypes(t *testing.T) {
 	t.Parallel()
 
@@ -167,6 +170,9 @@ components:
 // Struct with required/optional pointerness
 // ---------------------------------------------------------------------------
 
+// TestBuild_StructFieldPointerness verifies that required struct fields are
+// emitted as value types while optional scalar/struct fields are wrapped in a
+// pointer, and that slices and strings remain non-pointer regardless.
 func TestBuild_StructFieldPointerness(t *testing.T) {
 	t.Parallel()
 
@@ -240,6 +246,9 @@ components:
 // Array and map schemas
 // ---------------------------------------------------------------------------
 
+// TestBuild_ArrayAndMap verifies that array schemas produce []T alias targets
+// and that object schemas with additionalProperties produce map[string]T or
+// map[string]any aliases.
 func TestBuild_ArrayAndMap(t *testing.T) {
 	t.Parallel()
 
@@ -299,6 +308,9 @@ components:
 // Enum schemas
 // ---------------------------------------------------------------------------
 
+// TestBuild_Enum verifies that a string schema with an enum keyword produces a
+// KindEnum named type whose underlying alias is "string" and whose EnumValues
+// slice has exactly as many entries as the enum list in the spec.
 func TestBuild_Enum(t *testing.T) {
 	t.Parallel()
 
@@ -351,6 +363,9 @@ components:
 // allOf struct embedding
 // ---------------------------------------------------------------------------
 
+// TestBuild_AllOfEmbedding verifies that an allOf schema whose sole entry is a
+// $ref produces a KindStruct with an embedded field whose IsEmbedded flag is
+// true, matching Go struct-embedding semantics.
 func TestBuild_AllOfEmbedding(t *testing.T) {
 	t.Parallel()
 
@@ -396,6 +411,9 @@ components:
 // $ref linkage (no inline expansion)
 // ---------------------------------------------------------------------------
 
+// TestBuild_RefLinkage verifies that a $ref field resolves to the named type
+// rather than being expanded inline, and that an optional KindStruct field is
+// wrapped in a pointer per the optional/non-nilable pointerness rule.
 func TestBuild_RefLinkage(t *testing.T) {
 	t.Parallel()
 
@@ -441,6 +459,10 @@ components:
 // Inline object naming collision resolution
 // ---------------------------------------------------------------------------
 
+// TestBuild_InlineObjectNamingCollision verifies that two inline object
+// properties sharing the same local name but belonging to different parent
+// schemas are promoted to distinct InlineTypes (AlphaDetails and BetaDetails)
+// without a naming collision.
 func TestBuild_InlineObjectNamingCollision(t *testing.T) {
 	t.Parallel()
 
@@ -490,6 +512,9 @@ components:
 // Operation: path + query params, request body, response type
 // ---------------------------------------------------------------------------
 
+// TestBuild_Operation verifies that GET operations with path and query
+// parameters and POST operations with a request body are mapped to the correct
+// HTTP method, parameter counts, body type, and 2xx response type.
 func TestBuild_Operation(t *testing.T) {
 	t.Parallel()
 
@@ -613,6 +638,9 @@ components:
 // Multiple 2xx responses — pick the right ones
 // ---------------------------------------------------------------------------
 
+// TestBuild_MultipleResponses verifies that all 2xx response codes are
+// retained in the operation's Responses map while non-2xx codes (e.g. 400)
+// are excluded.
 func TestBuild_MultipleResponses(t *testing.T) {
 	t.Parallel()
 
@@ -668,6 +696,10 @@ components:
 // Integration: both testdata specs build without error
 // ---------------------------------------------------------------------------
 
+// TestBuild_Integration_GoogleSpec verifies that the real Google
+// Generative Language API spec (both YAML and JSON variants) loads and builds
+// without error, produces non-empty schemas and operations, and emits
+// diagnostics in deterministic sorted order.
 func TestBuild_Integration_GoogleSpec(t *testing.T) {
 	t.Parallel()
 
@@ -707,6 +739,10 @@ func TestBuild_Integration_GoogleSpec(t *testing.T) {
 	}
 }
 
+// TestBuild_Integration_OpenAISpec verifies that the real OpenAI API spec
+// builds without error, produces non-empty schemas and operations, emits
+// diagnostics in sorted order, and exercises the primitive-union diagnostic
+// code path.
 func TestBuild_Integration_OpenAISpec(t *testing.T) {
 	t.Parallel()
 

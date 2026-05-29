@@ -26,6 +26,9 @@ import (
 
 // ── Client() ─────────────────────────────────────────────────────────────────
 
+// TestClient_PackageName verifies that Client emits a valid Go source file whose
+// package declaration, exported struct, constructor, option helpers, and internal
+// do() method all match the caller-supplied package name.
 func TestClient_PackageName(t *testing.T) {
 	t.Parallel()
 	out, err := emit.Client("myapi")
@@ -47,6 +50,9 @@ func TestClient_PackageName(t *testing.T) {
 	)
 }
 
+// TestClient_CarveOuts verifies that the generated client file omits server-side
+// helpers (BadRequest, InternalServerError, derrors, ParseParams) that belong
+// to pkgsite §10 carve-outs and must never appear in a client package.
 func TestClient_CarveOuts(t *testing.T) {
 	t.Parallel()
 	out, err := emit.Client("myapi")
@@ -69,6 +75,8 @@ func TestClient_CarveOuts(t *testing.T) {
 
 // ── Methods() ────────────────────────────────────────────────────────────────
 
+// TestMethods_Empty verifies that Methods emits only the package declaration and
+// no method definitions when the IR contains no operations.
 func TestMethods_Empty(t *testing.T) {
 	t.Parallel()
 	out, err := emit.Methods(&ir.IR{PackageName: "mypkg"}, "mypkg")
@@ -82,6 +90,9 @@ func TestMethods_Empty(t *testing.T) {
 	containsAll(t, src, "package mypkg")
 }
 
+// TestMethods_SimpleGET verifies that a GET operation with no parameters emits
+// a method with a [context.Context]-only signature, a literal path assignment,
+// and a do() call passing nil for query, body, and output pointer.
 func TestMethods_SimpleGET(t *testing.T) {
 	t.Parallel()
 	irr := makeIR([]ir.Operation{
@@ -107,6 +118,9 @@ func TestMethods_SimpleGET(t *testing.T) {
 	)
 }
 
+// TestMethods_PathParams verifies that a path parameter is forwarded as a
+// function argument and substituted into the URL template via
+// [strings.NewReplacer] and [url.PathEscape].
 func TestMethods_PathParams(t *testing.T) {
 	t.Parallel()
 	irr := makeIR([]ir.Operation{
@@ -136,6 +150,9 @@ func TestMethods_PathParams(t *testing.T) {
 	)
 }
 
+// TestMethods_InitialismPathParam verifies that a path parameter whose GoName
+// contains an initialism (e.g. "APIVersion") is lowercased to a valid camelCase
+// variable name ("apiVersion") in the generated function signature and replacer call.
 func TestMethods_InitialismPathParam(t *testing.T) {
 	t.Parallel()
 	irr := makeIR([]ir.Operation{
@@ -163,6 +180,9 @@ func TestMethods_InitialismPathParam(t *testing.T) {
 	)
 }
 
+// TestMethods_QueryParams verifies that an optional query parameter causes
+// a generated *Params struct argument to appear in the method signature and
+// that params.encode() is called to build the [url.Values] passed to do().
 func TestMethods_QueryParams(t *testing.T) {
 	t.Parallel()
 	irr := makeIR([]ir.Operation{
@@ -191,6 +211,8 @@ func TestMethods_QueryParams(t *testing.T) {
 	)
 }
 
+// TestMethods_RequestBody verifies that a POST operation with a request body
+// emits a typed body pointer parameter and passes it to do() as the body argument.
 func TestMethods_RequestBody(t *testing.T) {
 	t.Parallel()
 	irr := makeIR([]ir.Operation{
@@ -215,6 +237,9 @@ func TestMethods_RequestBody(t *testing.T) {
 	)
 }
 
+// TestMethods_NoJSONResponse verifies that an operation whose success response
+// has no JSON body (e.g. HTTP 204) returns a raw [http.Response] instead of a
+// typed struct, and passes nil for the out-pointer in the do() call.
 func TestMethods_NoJSONResponse(t *testing.T) {
 	t.Parallel()
 	irr := makeIR([]ir.Operation{
@@ -241,6 +266,73 @@ func TestMethods_NoJSONResponse(t *testing.T) {
 	)
 }
 
+// TestMethods_SliceResponse verifies that a top-level slice response type is
+// returned by value (the signature is ([]Widget, error) and the method returns
+// out, not &out, with no pointer-to-slice).
+func TestMethods_SliceResponse(t *testing.T) {
+	t.Parallel()
+	irr := makeIR([]ir.Operation{
+		{
+			ID:        "listWidgets",
+			GoName:    "ListWidgets",
+			Method:    "GET",
+			Path:      "/widgets",
+			Responses: map[int]*ir.TypeRef{200: {Name: "[]Widget"}},
+		},
+	})
+	out, err := emit.Methods(irr, "mypkg")
+	if err != nil {
+		t.Fatalf("Methods: %v", err)
+	}
+	src := string(out)
+	containsAll(
+		t, src,
+		"func (c *Client) ListWidgets(ctx context.Context) ([]Widget, error)",
+		"var out []Widget",
+		"return out, nil",
+	)
+	if strings.Contains(src, "(*[]Widget, error)") {
+		t.Errorf("slice response must be returned by value, got pointer-to-slice signature:\n%s", src)
+	}
+	if strings.Contains(src, "return &out, nil") {
+		t.Errorf("slice response must return out by value, not &out:\n%s", src)
+	}
+}
+
+// TestMethods_MapResponse verifies that a top-level map response type is
+// returned by value (the signature is (map[string]Widget, error) and the method
+// returns out, not &out).
+func TestMethods_MapResponse(t *testing.T) {
+	t.Parallel()
+	irr := makeIR([]ir.Operation{
+		{
+			ID:        "getWidgetMap",
+			GoName:    "GetWidgetMap",
+			Method:    "GET",
+			Path:      "/widgets/map",
+			Responses: map[int]*ir.TypeRef{200: {Name: "map[string]Widget"}},
+		},
+	})
+	out, err := emit.Methods(irr, "mypkg")
+	if err != nil {
+		t.Fatalf("Methods: %v", err)
+	}
+	src := string(out)
+	containsAll(
+		t, src,
+		"func (c *Client) GetWidgetMap(ctx context.Context) (map[string]Widget, error)",
+		"var out map[string]Widget",
+		"return out, nil",
+	)
+	if strings.Contains(src, "return &out, nil") {
+		t.Errorf("map response must return out by value, not &out:\n%s", src)
+	}
+}
+
+// TestMethods_AllArgsOperation verifies that a PUT operation combining multiple
+// path parameters, an optional query parameter, and a request body produces a
+// method signature with all arguments in declaration order and a do() call that
+// threads path, query, and body correctly.
 func TestMethods_AllArgsOperation(t *testing.T) {
 	t.Parallel()
 	// Operation with path params + query params + body + JSON response.
@@ -276,6 +368,9 @@ func TestMethods_AllArgsOperation(t *testing.T) {
 	)
 }
 
+// TestMethods_DeterministicOnSameIR verifies that calling Methods twice with
+// the same IR produces byte-identical output, confirming there is no map
+// iteration or other source of non-determinism in the code generator.
 func TestMethods_DeterministicOnSameIR(t *testing.T) {
 	t.Parallel()
 	irr := makeIR([]ir.Operation{

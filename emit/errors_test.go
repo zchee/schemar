@@ -21,6 +21,8 @@ import (
 	"github.com/zchee/schemar/emit"
 )
 
+// TestErrors_PackageName verifies Errors emits the Error type, its methods, and
+// the package declaration for the requested package name.
 func TestErrors_PackageName(t *testing.T) {
 	t.Parallel()
 	out, err := emit.Errors("mypkg")
@@ -41,6 +43,8 @@ func TestErrors_PackageName(t *testing.T) {
 	)
 }
 
+// TestErrors_CarveOuts verifies the generated errors file omits the pkgsite §10
+// carve-outs, such as server-side helpers and an Unwrap method.
 func TestErrors_CarveOuts(t *testing.T) {
 	t.Parallel()
 	out, err := emit.Errors("mypkg")
@@ -61,6 +65,8 @@ func TestErrors_CarveOuts(t *testing.T) {
 	}
 }
 
+// TestErrors_JSONTagsUseOmitzero verifies the generated errors file uses omitzero
+// JSON struct tags and never omitempty, per project style.
 func TestErrors_JSONTagsUseOmitzero(t *testing.T) {
 	t.Parallel()
 	out, err := emit.Errors("mypkg")
@@ -75,6 +81,8 @@ func TestErrors_JSONTagsUseOmitzero(t *testing.T) {
 	containsAll(t, src, "omitzero")
 }
 
+// TestErrors_DifferentPackageNames verifies the emitted package declaration
+// tracks the package name passed to Errors across several inputs.
 func TestErrors_DifferentPackageNames(t *testing.T) {
 	t.Parallel()
 	tests := map[string]struct {

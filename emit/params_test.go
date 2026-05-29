@@ -226,7 +226,7 @@ func TestParams_SliceField(t *testing.T) {
 	)
 }
 
-// TestParams_TimeField verifies time.Time query parameter encoding.
+// TestParams_TimeField verifies [time.Time] query parameter encoding.
 func TestParams_TimeField(t *testing.T) {
 	t.Parallel()
 	irr := makeIR([]ir.Operation{{
