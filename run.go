@@ -118,10 +118,10 @@ func runGenerate(args []string) error {
 }
 
 // outDirMode is the permission for the generated output directory.
-const outDirMode = 0o750
+const outDirMode = 0o755
 
 // outFileMode is the permission for generated Go source files.
-const outFileMode = 0o600
+const outFileMode = 0o644
 
 // emitFile pairs a generated file name with its formatted source bytes.
 type emitFile struct {
@@ -221,12 +221,11 @@ func emitFiles(irResult *ir.IR, pkgName, outDir string) ([]emitFile, error) {
 		return nil, fmt.Errorf("emitting errors.go: %w", err)
 	}
 
-	files := make([]emitFile, 0, 5)
-	files = append(files,
-		emitFile{name: "types.go", src: typesBytes},
-		emitFile{name: "client.go", src: clientBytes},
-		emitFile{name: "errors.go", src: errorsBytes},
-	)
+	files := []emitFile{
+		{name: "types.go", src: typesBytes},
+		{name: "client.go", src: clientBytes},
+		{name: "errors.go", src: errorsBytes},
+	}
 
 	if len(irResult.Operations) == 0 {
 		return files, nil
@@ -240,7 +239,8 @@ func emitFiles(irResult *ir.IR, pkgName, outDir string) ([]emitFile, error) {
 	if err != nil {
 		return nil, fmt.Errorf("emitting methods.go: %w", err)
 	}
-	return append(files,
+	return append(
+		files,
 		emitFile{name: "params.go", src: paramsBytes},
 		emitFile{name: "methods.go", src: methodsBytes},
 	), nil

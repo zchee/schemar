@@ -39,11 +39,26 @@ const (
 type builder struct {
 	ir            *IR
 	diags         []Diagnostic
-	allTypeNames  map[string]bool // every Go type name allocated so far
-	typeKinds     map[string]Kind // kind of each allocated named type
-	inlineTypes   []NamedType     // anonymous schemas promoted to named types
-	seenOpGoNames map[string]bool // deduplicate operations with the same operationId
+	allTypeNames  map[string]bool       // every Go type name allocated so far
+	typeKinds     map[string]Kind       // kind of each allocated named type
+	aliasShapes   map[string]aliasShape // container shape of each named alias
+	inlineTypes   []NamedType           // anonymous schemas promoted to named types
+	seenOpGoNames map[string]bool       // deduplicate operations with the same operationId
 }
+
+// aliasShape records whether a named type's underlying Go type is a slice or
+// map, so that a $ref to such an alias can be resolved to the correct
+// by-value/by-pointer return convention even before the alias is fully built.
+type aliasShape uint8
+
+const (
+	// The aliasShapeOther shape covers structs, enums, unions, primitives, and any.
+	aliasShapeOther aliasShape = iota
+	// The aliasShapeSlice shape marks a named alias whose underlying type is a slice.
+	aliasShapeSlice
+	// The aliasShapeMap shape marks a named alias whose underlying type is a map.
+	aliasShapeMap
+)
 
 // opPair pairs an HTTP method string with its libopenapi Operation.
 type opPair struct {
@@ -60,6 +75,7 @@ func Build(doc *v3high.Document) (*IR, []Diagnostic, error) {
 		ir:            &IR{},
 		allTypeNames:  make(map[string]bool),
 		typeKinds:     make(map[string]Kind),
+		aliasShapes:   make(map[string]aliasShape),
 		seenOpGoNames: make(map[string]bool),
 	}
 
@@ -98,6 +114,9 @@ func (b *builder) registerSchemaKinds(doc *v3high.Document) {
 		goName := naming.GoExported(name)
 		b.allTypeNames[goName] = true
 		b.typeKinds[goName] = preClassifyKind(proxy)
+		if shape := preClassifyShape(proxy); shape != aliasShapeOther {
+			b.aliasShapes[goName] = shape
+		}
 	}
 }
 
@@ -196,6 +215,47 @@ func classifyKind(schema *highbase.Schema) Kind {
 	return KindAlias
 }
 
+// preClassifyShape performs a shallow container-shape classification of a
+// SchemaProxy so that the alias-shape registry is populated before pass 1.
+// This lets schemaToTypeRef resolve the by-value/by-pointer return convention
+// for a $ref to a named slice or map alias, including forward references.
+//
+// A top-level schema that is itself a $ref to another alias is reported as
+// aliasShapeOther: the reference chain is not followed here, matching
+// preClassifyKind. Such transitive slice/map aliases fall back to by-pointer.
+func preClassifyShape(proxy *highbase.SchemaProxy) aliasShape {
+	if proxy == nil || proxy.IsReference() {
+		return aliasShapeOther
+	}
+	schema := proxy.Schema()
+	if schema == nil {
+		return aliasShapeOther
+	}
+	return classifyShape(schema)
+}
+
+// classifyShape maps a resolved Schema to its container shape without building
+// the full NamedType. It mirrors the slice/map alias dispatch in
+// schemaToNamedType: array schemas (including string/byte) become slices, and
+// additionalProperties-only schemas become maps.
+func classifyShape(schema *highbase.Schema) aliasShape {
+	if isInlineComposite(schema) {
+		return aliasShapeOther
+	}
+	pt := schemaType(schema)
+	if pt == "array" || (schema.Items != nil && schema.Items.IsA()) {
+		return aliasShapeSlice
+	}
+	if pt == "string" && schema.Format == "byte" {
+		return aliasShapeSlice
+	}
+	hasProps := schema.Properties != nil && schema.Properties.Len() > 0
+	if !hasProps && schema.AdditionalProperties != nil {
+		return aliasShapeMap
+	}
+	return aliasShapeOther
+}
+
 // buildTopLevelSchema creates a NamedType for one components/schemas entry.
 func (b *builder) buildTopLevelSchema(name string, proxy *highbase.SchemaProxy) (NamedType, error) {
 	goName := naming.GoExported(name)
@@ -264,7 +324,7 @@ func (b *builder) schemaToNamedType(goName, originalName string, schema *highbas
 			OriginalName: originalName,
 			Kind:         KindAlias,
 			DocComment:   docComment,
-			AliasTarget:  &TypeRef{Name: "[]" + itemRef.Name, NeedsTime: itemRef.NeedsTime},
+			AliasTarget:  &TypeRef{Name: "[]" + itemRef.Name, NeedsTime: itemRef.NeedsTime, IsSlice: true},
 		}, nil
 	}
 
@@ -440,9 +500,9 @@ func (b *builder) buildMapAliasNamedType(goName, originalName string, schema *hi
 	var underlying TypeRef
 	if schema.AdditionalProperties.IsA() {
 		elemRef := b.schemaToTypeRef(schema.AdditionalProperties.A, goName, "Value")
-		underlying = TypeRef{Name: "map[string]" + elemRef.Name, NeedsTime: elemRef.NeedsTime}
+		underlying = TypeRef{Name: "map[string]" + elemRef.Name, NeedsTime: elemRef.NeedsTime, IsMap: true}
 	} else {
-		underlying = TypeRef{Name: "map[string]any", IsBuiltin: true}
+		underlying = TypeRef{Name: "map[string]any", IsBuiltin: true, IsMap: true}
 	}
 	return NamedType{
 		Name:         goName,
@@ -464,15 +524,15 @@ func isInlineComposite(schema *highbase.Schema) bool {
 func (b *builder) containerTypeRef(schema *highbase.Schema, pt, parentGoName, fieldGoName string) (TypeRef, bool) {
 	if pt == "array" || (schema.Items != nil && schema.Items.IsA()) {
 		elemRef := b.itemsTypeRef(schema, parentGoName, fieldGoName)
-		return TypeRef{Name: "[]" + elemRef.Name, NeedsTime: elemRef.NeedsTime}, true
+		return TypeRef{Name: "[]" + elemRef.Name, NeedsTime: elemRef.NeedsTime, IsSlice: true}, true
 	}
 	hasProps := schema.Properties != nil && schema.Properties.Len() > 0
 	if !hasProps && schema.AdditionalProperties != nil {
 		if schema.AdditionalProperties.IsA() {
 			elemRef := b.schemaToTypeRef(schema.AdditionalProperties.A, parentGoName, fieldGoName+"Value")
-			return TypeRef{Name: "map[string]" + elemRef.Name, NeedsTime: elemRef.NeedsTime}, true
+			return TypeRef{Name: "map[string]" + elemRef.Name, NeedsTime: elemRef.NeedsTime, IsMap: true}, true
 		}
-		return TypeRef{Name: "map[string]any", IsBuiltin: true}, true
+		return TypeRef{Name: "map[string]any", IsBuiltin: true, IsMap: true}, true
 	}
 	return TypeRef{}, false
 }
@@ -489,7 +549,13 @@ func (b *builder) schemaToTypeRef(proxy *highbase.SchemaProxy, parentGoName, fie
 		refName := refToTypeName(proxy.GetReference())
 		goName := naming.GoExported(refName)
 		kind, known := b.typeKinds[goName]
-		return TypeRef{Name: goName, IsEnum: known && kind == KindEnum}
+		shape := b.aliasShapes[goName]
+		return TypeRef{
+			Name:    goName,
+			IsEnum:  known && kind == KindEnum,
+			IsSlice: shape == aliasShapeSlice,
+			IsMap:   shape == aliasShapeMap,
+		}
 	}
 
 	schema := proxy.Schema()
@@ -534,6 +600,7 @@ func (b *builder) allocInlineType(schema *highbase.Schema, parentGoName, fieldGo
 	nt, err := b.schemaToNamedType(inlineName, parentGoName+"."+fieldGoName, schema, docComment)
 	if err != nil {
 		b.diagWarn("inline schema build failed: "+err.Error(), parentGoName+"."+fieldGoName)
+		return TypeRef{Name: goTypeAny, IsBuiltin: true}
 	}
 	b.typeKinds[nt.Name] = nt.Kind
 	b.inlineTypes = append(b.inlineTypes, nt)
@@ -781,7 +848,7 @@ func primitiveTypeRef(schema *highbase.Schema) TypeRef {
 		case "date-time":
 			return TypeRef{Name: "time.Time", NeedsTime: true}
 		case "byte":
-			return TypeRef{Name: "[]byte", IsBuiltin: true}
+			return TypeRef{Name: "[]byte", IsBuiltin: true, IsSlice: true}
 		}
 		return TypeRef{Name: goTypeString, IsBuiltin: true}
 	case "integer":

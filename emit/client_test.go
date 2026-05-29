@@ -277,7 +277,7 @@ func TestMethods_SliceResponse(t *testing.T) {
 			GoName:    "ListWidgets",
 			Method:    "GET",
 			Path:      "/widgets",
-			Responses: map[int]*ir.TypeRef{200: {Name: "[]Widget"}},
+			Responses: map[int]*ir.TypeRef{200: {Name: "[]Widget", IsSlice: true}},
 		},
 	})
 	out, err := emit.Methods(irr, "mypkg")
@@ -310,7 +310,7 @@ func TestMethods_MapResponse(t *testing.T) {
 			GoName:    "GetWidgetMap",
 			Method:    "GET",
 			Path:      "/widgets/map",
-			Responses: map[int]*ir.TypeRef{200: {Name: "map[string]Widget"}},
+			Responses: map[int]*ir.TypeRef{200: {Name: "map[string]Widget", IsMap: true}},
 		},
 	})
 	out, err := emit.Methods(irr, "mypkg")
@@ -326,6 +326,40 @@ func TestMethods_MapResponse(t *testing.T) {
 	)
 	if strings.Contains(src, "return &out, nil") {
 		t.Errorf("map response must return out by value, not &out:\n%s", src)
+	}
+}
+
+// TestMethods_NamedSliceAliasResponse verifies that a response whose type is a
+// named alias to a slice (e.g. type WidgetList []Widget) is returned by value,
+// not by pointer. The IsSlice flag on the TypeRef drives this even though the
+// type name is a bare identifier with no "[]" prefix.
+func TestMethods_NamedSliceAliasResponse(t *testing.T) {
+	t.Parallel()
+	irr := makeIR([]ir.Operation{
+		{
+			ID:        "listWidgets",
+			GoName:    "ListWidgets",
+			Method:    "GET",
+			Path:      "/widgets",
+			Responses: map[int]*ir.TypeRef{200: {Name: "WidgetList", IsSlice: true}},
+		},
+	})
+	out, err := emit.Methods(irr, "mypkg")
+	if err != nil {
+		t.Fatalf("Methods: %v", err)
+	}
+	src := string(out)
+	containsAll(
+		t, src,
+		"func (c *Client) ListWidgets(ctx context.Context) (WidgetList, error)",
+		"var out WidgetList",
+		"return out, nil",
+	)
+	if strings.Contains(src, "(*WidgetList, error)") {
+		t.Errorf("named slice alias response must be returned by value, got pointer signature:\n%s", src)
+	}
+	if strings.Contains(src, "return &out, nil") {
+		t.Errorf("named slice alias response must return out by value, not &out:\n%s", src)
 	}
 }
 

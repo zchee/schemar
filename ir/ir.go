@@ -49,6 +49,16 @@ type TypeRef struct {
 	// with exported const values). Only meaningful when !IsBuiltin. Used by the
 	// params emitter to determine whether string(x) is a valid cast.
 	IsEnum bool
+	// IsSlice is true when the underlying Go type is a slice, whether expressed
+	// inline (Name begins with "[]") or as a named alias to a slice
+	// (e.g. type MySlice []T). Used by the client emitter to decide that the
+	// type is returned by value rather than by pointer.
+	IsSlice bool
+	// IsMap is true when the underlying Go type is a map, whether expressed
+	// inline (Name begins with "map[") or as a named alias to a map
+	// (e.g. type MyMap map[string]T). Used by the client emitter to decide that
+	// the type is returned by value rather than by pointer.
+	IsMap bool
 }
 
 // Field is one field of a generated Go struct.

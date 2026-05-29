@@ -34,8 +34,8 @@ func moduleRoot(t *testing.T) string {
 	if !ok {
 		t.Fatal("runtime.Caller failed")
 	}
-	// file is .../pkg/cmd/schemar/e2e_test.go
-	return filepath.Dir(filepath.Dir(filepath.Dir(filepath.Dir(file))))
+	// Since e2e_test.go is at the repository root, its directory is the module root.
+	return filepath.Dir(file)
 }
 
 // runSchemar runs the generate subcommand via `go run .` from the module root.
@@ -187,25 +187,25 @@ func TestE2E_CompileGate(t *testing.T) {
 		canary   bool // whether to also run the canary program
 	}{
 		"google yaml": {
-			specPath: filepath.Join(root, "pkg", "testdata", "google", "generativelanguage.googleapis.com", "v1beta", "interactions", "interactions.openapi.yaml"),
+			specPath: filepath.Join(root, "testdata", "google", "generativelanguage.googleapis.com", "v1beta", "interactions", "interactions.openapi.yaml"),
 			pkgName:  "geminiapi",
 			module:   "example.com/geminiapi",
 			canary:   true,
 		},
 		"google json": {
-			specPath: filepath.Join(root, "pkg", "testdata", "google", "generativelanguage.googleapis.com", "v1beta", "interactions", "interactions.openapi.json"),
+			specPath: filepath.Join(root, "testdata", "google", "generativelanguage.googleapis.com", "v1beta", "interactions", "interactions.openapi.json"),
 			pkgName:  "geminiapi",
 			module:   "example.com/geminiapi",
 			canary:   false, // same spec as yaml; skip duplicate canary
 		},
 		"openai yaml": {
-			specPath: filepath.Join(root, "pkg", "testdata", "openai", "openapi.yaml"),
+			specPath: filepath.Join(root, "testdata", "openai", "openapi.yaml"),
 			pkgName:  "openaiapi",
 			module:   "example.com/openaiapi",
 			canary:   true,
 		},
 		"synthetic collisions": {
-			specPath: filepath.Join(root, "pkg", "testdata", "synthetic", "collisions.yaml"),
+			specPath: filepath.Join(root, "testdata", "synthetic", "collisions.yaml"),
 			pkgName:  "collisionapi",
 			module:   "example.com/collisionapi",
 			canary:   true,

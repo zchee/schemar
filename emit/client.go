@@ -174,12 +174,14 @@ func primaryResponseType(responses map[int]*ir.TypeRef) *ir.TypeRef {
 
 // returnedByValue reports whether a response of type t is returned by value
 // rather than by pointer. Slice and map types are returned directly; all other
-// named types are returned as a pointer.
+// named types are returned as a pointer. The IsSlice and IsMap flags are set by
+// the IR builder, so named aliases to slices or maps (e.g. type MySlice []T)
+// are recognized as well, not only inline "[]" or "map[" type expressions.
 func returnedByValue(t *ir.TypeRef) bool {
 	if t == nil {
 		return false
 	}
-	return strings.HasPrefix(t.Name, "[]") || strings.HasPrefix(t.Name, "map[")
+	return t.IsSlice || t.IsMap
 }
 
 // ── Method declaration rendering ────────────────────────────────────────────

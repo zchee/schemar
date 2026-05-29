@@ -692,6 +692,106 @@ components:
 	}
 }
 
+// TestBuild_NamedContainerAliasResponse verifies that a response body which is
+// a $ref to a named slice or map alias carries the IsSlice/IsMap flags on its
+// TypeRef. This is what lets the client emitter return such responses by value
+// (e.g. (WidgetList, error)) rather than by pointer (*WidgetList). The flags
+// must be set even though the $ref resolves to a bare type name with no "[]" or
+// "map[" prefix, which is the case the prefix-based heuristic could not handle.
+func TestBuild_NamedContainerAliasResponse(t *testing.T) {
+	t.Parallel()
+
+	const specYAML = `openapi: "3.0.3"
+info:
+  title: Test
+  version: "1.0"
+paths:
+  /widgets:
+    get:
+      operationId: listWidgets
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WidgetList'
+  /widgets/map:
+    get:
+      operationId: widgetMap
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WidgetMap'
+  /widgets/{id}:
+    get:
+      operationId: getWidget
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Widget'
+components:
+  schemas:
+    Widget:
+      type: object
+      properties:
+        id: {type: string}
+    WidgetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Widget'
+    WidgetMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Widget'
+`
+
+	tests := map[string]struct {
+		opGoName    string
+		wantName    string
+		wantIsSlice bool
+		wantIsMap   bool
+	}{
+		"slice alias returned by value": {
+			opGoName: "ListWidgets", wantName: "WidgetList", wantIsSlice: true,
+		},
+		"map alias returned by value": {
+			opGoName: "WidgetMap", wantName: "WidgetMap", wantIsMap: true,
+		},
+		"struct ref returned by pointer": {
+			opGoName: "GetWidget", wantName: "Widget",
+		},
+	}
+
+	irr, _ := specFromYAML(t, specYAML)
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+			op := findOp(irr, tc.opGoName)
+			if op == nil {
+				t.Fatalf("operation %q not found", tc.opGoName)
+			}
+			ref := op.Responses[200]
+			if ref == nil {
+				t.Fatalf("Responses[200] nil for %q", tc.opGoName)
+			}
+			if ref.Name != tc.wantName {
+				t.Errorf("Name = %q, want %q", ref.Name, tc.wantName)
+			}
+			if ref.IsSlice != tc.wantIsSlice {
+				t.Errorf("IsSlice = %t, want %t", ref.IsSlice, tc.wantIsSlice)
+			}
+			if ref.IsMap != tc.wantIsMap {
+				t.Errorf("IsMap = %t, want %t", ref.IsMap, tc.wantIsMap)
+			}
+		})
+	}
+}
+
 // ---------------------------------------------------------------------------
 // Integration: both testdata specs build without error
 // ---------------------------------------------------------------------------
