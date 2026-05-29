@@ -18,11 +18,10 @@ import (
 	"errors"
 	"testing"
 
-	gocmp "github.com/google/go-cmp/cmp"
-	gocmpopts "github.com/google/go-cmp/cmp/cmpopts"
-
 	json "github.com/go-json-experiment/json"
 	"github.com/go-json-experiment/json/jsontext"
+	gocmp "github.com/google/go-cmp/cmp"
+	gocmpopts "github.com/google/go-cmp/cmp/cmpopts"
 
 	"github.com/zchee/schemar/oneof"
 )
@@ -407,13 +406,13 @@ func TestDiscriminatedUnion_Marshal(t *testing.T) {
 			if err != nil {
 				t.Fatalf("Marshal() unexpected error: %v", err)
 			}
-			// Verify the expected key appears in the marshalled output.
+			// Verify the expected key appears in the marshaled output.
 			var raw map[string]jsontext.Value
 			if err := json.Unmarshal(out, &raw); err != nil {
 				t.Fatalf("re-unmarshal of output failed: %v", err)
 			}
 			if _, ok := raw[tc.wantKey]; !ok {
-				t.Errorf("marshalled output %s does not contain expected key %q", out, tc.wantKey)
+				t.Errorf("marshaled output %s does not contain expected key %q", out, tc.wantKey)
 			}
 		})
 	}

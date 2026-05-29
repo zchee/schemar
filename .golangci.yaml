@@ -96,6 +96,17 @@ linters:
       check-type-assertions: true
       check-blank: true
       disable-default-exclusions: true
+      # strings.Builder and bytes.Buffer write methods document a always-nil
+      # error; re-exempt them to match the revive unhandled-error config above.
+      exclude-functions:
+        - (*strings.Builder).Write
+        - (*strings.Builder).WriteByte
+        - (*strings.Builder).WriteRune
+        - (*strings.Builder).WriteString
+        - (*bytes.Buffer).Write
+        - (*bytes.Buffer).WriteByte
+        - (*bytes.Buffer).WriteRune
+        - (*bytes.Buffer).WriteString
 
     govet:
       enable-all: true

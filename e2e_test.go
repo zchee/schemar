@@ -25,7 +25,8 @@ import (
 )
 
 // moduleRoot returns the repository root (the directory containing go.mod).
-// The test source is at cmd/schemar/, so we go up two levels.
+// The test source is at pkg/cmd/schemar/, so we go up three levels to reach
+// the module root that holds main.go.
 func moduleRoot(t *testing.T) string {
 	t.Helper()
 	// runtime.Caller(0) gives the path of this source file.
@@ -33,11 +34,11 @@ func moduleRoot(t *testing.T) string {
 	if !ok {
 		t.Fatal("runtime.Caller failed")
 	}
-	// file is .../cmd/schemar/e2e_test.go
-	return filepath.Dir(filepath.Dir(filepath.Dir(file)))
+	// file is .../pkg/cmd/schemar/e2e_test.go
+	return filepath.Dir(filepath.Dir(filepath.Dir(filepath.Dir(file))))
 }
 
-// runSchemar runs `go run . generate <args...>` from the module root.
+// runSchemar runs the generate subcommand via `go run .` from the module root.
 // Using `go run` avoids macOS sandbox exec restrictions that prevent
 // running binaries built into /tmp directories.
 func runSchemar(t *testing.T, root string, args ...string) {
@@ -107,7 +108,7 @@ func buildGeneratedCode(t *testing.T, dir string) {
 // runCanary writes a tiny canary program into outDir/cmd/canary/main.go that
 // imports the generated package, constructs a Client, and runs it. This
 // catches name-collision bugs and import failures that go build alone may miss.
-func runCanary(t *testing.T, outDir, modulePath, pkgName, root string) {
+func runCanary(t *testing.T, outDir, modulePath, pkgName string) {
 	t.Helper()
 
 	canaryDir := filepath.Join(outDir, "cmd", "canary")
@@ -186,25 +187,25 @@ func TestE2E_CompileGate(t *testing.T) {
 		canary   bool // whether to also run the canary program
 	}{
 		"google yaml": {
-			specPath: filepath.Join(root, "testdata", "google", "generativelanguage.googleapis.com", "v1beta", "interactions", "interactions.openapi.yaml"),
+			specPath: filepath.Join(root, "pkg", "testdata", "google", "generativelanguage.googleapis.com", "v1beta", "interactions", "interactions.openapi.yaml"),
 			pkgName:  "geminiapi",
 			module:   "example.com/geminiapi",
 			canary:   true,
 		},
 		"google json": {
-			specPath: filepath.Join(root, "testdata", "google", "generativelanguage.googleapis.com", "v1beta", "interactions", "interactions.openapi.json"),
+			specPath: filepath.Join(root, "pkg", "testdata", "google", "generativelanguage.googleapis.com", "v1beta", "interactions", "interactions.openapi.json"),
 			pkgName:  "geminiapi",
 			module:   "example.com/geminiapi",
 			canary:   false, // same spec as yaml; skip duplicate canary
 		},
 		"openai yaml": {
-			specPath: filepath.Join(root, "testdata", "openai", "openapi.yaml"),
+			specPath: filepath.Join(root, "pkg", "testdata", "openai", "openapi.yaml"),
 			pkgName:  "openaiapi",
 			module:   "example.com/openaiapi",
 			canary:   true,
 		},
 		"synthetic collisions": {
-			specPath: filepath.Join(root, "testdata", "synthetic", "collisions.yaml"),
+			specPath: filepath.Join(root, "pkg", "testdata", "synthetic", "collisions.yaml"),
 			pkgName:  "collisionapi",
 			module:   "example.com/collisionapi",
 			canary:   true,
@@ -234,7 +235,7 @@ func TestE2E_CompileGate(t *testing.T) {
 			// Step 4: canary program imports the package, constructs a Client,
 			// and runs — proving the generated types are usable end-to-end.
 			if tc.canary {
-				runCanary(t, outDir, tc.module, tc.pkgName, root)
+				runCanary(t, outDir, tc.module, tc.pkgName)
 			}
 		})
 	}

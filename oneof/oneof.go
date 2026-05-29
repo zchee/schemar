@@ -29,8 +29,9 @@ package oneof
 
 import (
 	"errors"
+	"fmt"
 
-	json "github.com/go-json-experiment/json"
+	"github.com/go-json-experiment/json"
 	"github.com/go-json-experiment/json/jsontext"
 )
 
@@ -75,7 +76,7 @@ const (
 	StrategyA
 )
 
-// UnionInfo is the result of Classify; it summarises a oneOf/anyOf union and
+// UnionInfo is the result of Classify; it summarizes a oneOf/anyOf union and
 // the chosen encoding strategy.
 type UnionInfo struct {
 	// IsOneOf is true for oneOf; false for anyOf. The emitted struct is
@@ -145,7 +146,7 @@ var ErrNoVariantMatched = errors.New("oneof: discriminator value did not match a
 func MatchDiscriminator(data []byte, field string, values []string) (int, error) {
 	var obj map[string]jsontext.Value
 	if err := json.Unmarshal(data, &obj); err != nil {
-		return -1, err
+		return -1, fmt.Errorf("oneof: decoding discriminator object: %w", err)
 	}
 
 	raw, ok := obj[field]
@@ -155,7 +156,7 @@ func MatchDiscriminator(data []byte, field string, values []string) (int, error)
 
 	var s string
 	if err := json.Unmarshal([]byte(raw), &s); err != nil {
-		return -1, err
+		return -1, fmt.Errorf("oneof: decoding discriminator field %q: %w", field, err)
 	}
 
 	for i, v := range values {
@@ -187,5 +188,8 @@ func UnmarshalTrial(data []byte, decoders []func([]byte) error) (int, error) {
 // structurally incompatible JSON objects are rejected. It is the recommended
 // decoder function to supply to UnmarshalTrial for Strategy B trial-decode.
 func StrictUnmarshal(data []byte, v any) error {
-	return json.Unmarshal(data, v, json.RejectUnknownMembers(true))
+	if err := json.Unmarshal(data, v, json.RejectUnknownMembers(true)); err != nil {
+		return fmt.Errorf("oneof: strict unmarshal: %w", err)
+	}
+	return nil
 }

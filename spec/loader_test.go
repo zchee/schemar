@@ -21,6 +21,7 @@ import (
 	"testing"
 
 	gocmp "github.com/google/go-cmp/cmp"
+
 	"github.com/zchee/schemar/spec"
 )
 

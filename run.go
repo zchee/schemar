@@ -15,6 +15,7 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"flag"
 	"fmt"
@@ -42,8 +43,8 @@ type generateConfig struct {
 }
 
 // Run is the main entry point for the schemar CLI.
-// It accepts the argument list (typically os.Args[1:]) and returns an exit
-// code suitable for os.Exit.
+// It accepts the argument list (typically [os.Args][1:]) and returns an exit
+// code suitable for [os.Exit].
 func Run(args []string) int {
 	if len(args) == 0 {
 		printUsage(os.Stderr)
@@ -101,8 +102,11 @@ func runGenerate(args []string) error {
 	fs.BoolVar(&cfg.dryRun, "dry-run", false, "print file list and byte counts without writing (post-v1 hook, currently ignored)")
 
 	if err := fs.Parse(args); err != nil {
-		// flag.ContinueOnError already printed the error.
-		return err
+		// flag.ContinueOnError already printed the error; -help is not a failure.
+		if errors.Is(err, flag.ErrHelp) {
+			return nil
+		}
+		return fmt.Errorf("parsing generate flags: %w", err)
 	}
 
 	if cfg.input == "" {
@@ -113,28 +117,32 @@ func runGenerate(args []string) error {
 	return generate(cfg)
 }
 
+// outDirMode is the permission for the generated output directory.
+const outDirMode = 0o750
+
+// outFileMode is the permission for generated Go source files.
+const outFileMode = 0o600
+
+// emitFile pairs a generated file name with its formatted source bytes.
+type emitFile struct {
+	name string
+	src  []byte
+}
+
 // generate executes the full Load → Build → Emit pipeline.
 func generate(cfg *generateConfig) error {
-	// ── Step 1: load the OpenAPI spec ────────────────────────────────────────
-
 	doc, err := spec.Load(cfg.input)
 	if err != nil {
 		return fmt.Errorf("loading spec %q: %w", cfg.input, err)
 	}
-
-	// ── Step 2: build the IR ──────────────────────────────────────────────────
 
 	irResult, diags, err := ir.Build(&doc.Model)
 	if err != nil {
 		return fmt.Errorf("building IR: %w", err)
 	}
 
-	// ── Step 3: resolve package name (Option A — single source of truth) ─────
+	// Resolve package name (Option A — single source of truth).
 	// Precedence: explicit flag → IR-derived (from info.title) → fallback.
-	// NOTE: RenderTypes reads PackageName from irResult; the other emitters
-	// accept it as an explicit argument. Setting it on the IR keeps all callers
-	// in sync. Future cleanup: standardise all emitters to (ir, pkgName, brokenPath).
-
 	pkgName := cfg.pkg
 	if pkgName == "" {
 		pkgName = irResult.PackageName
@@ -144,123 +152,134 @@ func generate(cfg *generateConfig) error {
 	}
 	irResult.PackageName = pkgName
 
-	// ── Step 4: resolve output directory ─────────────────────────────────────
-
 	outDir := cfg.output
 	if outDir == "" {
 		outDir = filepath.Join(".", pkgName)
 	}
-
-	// ── Step 5: create output directory ──────────────────────────────────────
-
-	if err := os.MkdirAll(outDir, 0o755); err != nil {
+	if err := os.MkdirAll(outDir, outDirMode); err != nil {
 		return fmt.Errorf("creating output directory %q: %w", outDir, err)
 	}
 
-	// ── Step 6: print IR diagnostics (always on stderr) ──────────────────────
-
+	// Print IR diagnostics (always on stderr).
 	for _, d := range diags {
 		fmt.Fprintf(os.Stderr, "schemar: [%s] %s: %s\n", d.Kind, d.Location, d.Message)
 	}
-
-	// ── Step 7: verbose progress ──────────────────────────────────────────────
 
 	if cfg.verbose {
 		specVer := doc.Model.Version
 		if specVer == "" {
 			specVer = "(unknown)"
 		}
-		fmt.Fprintf(os.Stderr, "schemar: spec version %s\n", specVer)
-		fmt.Fprintf(os.Stderr, "schemar: package %q → %s/\n", pkgName, outDir)
-		totalParams := 0
-		for _, op := range irResult.Operations {
-			totalParams += len(op.PathParams) + len(op.QueryParams) + len(op.HeaderParams)
-		}
-		fmt.Fprintf(os.Stderr, "schemar: %d schemas (%d inline), %d operations, %d parameters\n",
-			len(irResult.Schemas), len(irResult.InlineTypes), len(irResult.Operations), totalParams)
-		if len(diags) > 0 {
-			fmt.Fprintf(os.Stderr, "schemar: %d diagnostic(s) (see above)\n", len(diags))
-		}
+		printVerboseStats(specVer, irResult, diags, pkgName, outDir)
 	}
-
-	// ── Step 8: emit each file ────────────────────────────────────────────────
 
 	// Filter out component schemas whose Go names are reserved by the other
 	// emitters (client.go declares Client and Option; errors.go declares Error).
-	// These schemas are either superseded by the emitter types or would cause
-	// a redeclaration compile error.
 	filterReservedSchemas(irResult)
 
-	type emitFile struct {
-		name string
-		src  []byte
-		err  error
+	files, err := emitFiles(irResult, pkgName, outDir)
+	if err != nil {
+		return err
+	}
+	if err := writeFiles(files, outDir, cfg.verbose); err != nil {
+		return err
 	}
 
-	files := []emitFile{
-		{name: "types.go"},
-		{name: "client.go"},
-		{name: "errors.go"},
-	}
+	runGoVet(outDir, cfg.verbose)
+	return nil
+}
 
+// printVerboseStats writes spec and IR summary statistics to stderr.
+func printVerboseStats(specVer string, irResult *ir.IR, diags []ir.Diagnostic, pkgName, outDir string) {
+	fmt.Fprintf(os.Stderr, "schemar: spec version %s\n", specVer)
+	fmt.Fprintf(os.Stderr, "schemar: package %q → %s/\n", pkgName, outDir)
+	totalParams := 0
+	for _, op := range irResult.Operations {
+		totalParams += len(op.PathParams) + len(op.QueryParams) + len(op.HeaderParams)
+	}
+	fmt.Fprintf(os.Stderr, "schemar: %d schemas (%d inline), %d operations, %d parameters\n",
+		len(irResult.Schemas), len(irResult.InlineTypes), len(irResult.Operations), totalParams)
+	if len(diags) > 0 {
+		fmt.Fprintf(os.Stderr, "schemar: %d diagnostic(s) (see above)\n", len(diags))
+	}
+}
+
+// emitFiles renders every output file for irResult, returning them in write
+// order. The params.go and methods.go files are produced only when the spec
+// declares at least one operation.
+func emitFiles(irResult *ir.IR, pkgName, outDir string) ([]emitFile, error) {
 	typesBytes, err := emit.RenderTypes(irResult, filepath.Join(outDir, "types.go.broken"))
 	if err != nil {
-		return fmt.Errorf("emitting types.go: %w", err)
+		return nil, fmt.Errorf("emitting types.go: %w", err)
 	}
-	files[0].src = typesBytes
-
 	clientBytes, err := emit.Client(pkgName)
 	if err != nil {
-		return fmt.Errorf("emitting client.go: %w", err)
+		return nil, fmt.Errorf("emitting client.go: %w", err)
 	}
-	files[1].src = clientBytes
-
 	errorsBytes, err := emit.Errors(pkgName)
 	if err != nil {
-		return fmt.Errorf("emitting errors.go: %w", err)
-	}
-	files[2].src = errorsBytes
-
-	// params.go and methods.go are only emitted when there are operations.
-	if len(irResult.Operations) > 0 {
-		paramsBytes, err := emit.Params(irResult, pkgName)
-		if err != nil {
-			return fmt.Errorf("emitting params.go: %w", err)
-		}
-		files = append(files, emitFile{name: "params.go", src: paramsBytes})
-
-		methodsBytes, err := emit.Methods(irResult, pkgName)
-		if err != nil {
-			return fmt.Errorf("emitting methods.go: %w", err)
-		}
-		files = append(files, emitFile{name: "methods.go", src: methodsBytes})
+		return nil, fmt.Errorf("emitting errors.go: %w", err)
 	}
 
-	// Write all files.
+	files := make([]emitFile, 0, 5)
+	files = append(files,
+		emitFile{name: "types.go", src: typesBytes},
+		emitFile{name: "client.go", src: clientBytes},
+		emitFile{name: "errors.go", src: errorsBytes},
+	)
+
+	if len(irResult.Operations) == 0 {
+		return files, nil
+	}
+
+	paramsBytes, err := emit.Params(irResult, pkgName)
+	if err != nil {
+		return nil, fmt.Errorf("emitting params.go: %w", err)
+	}
+	methodsBytes, err := emit.Methods(irResult, pkgName)
+	if err != nil {
+		return nil, fmt.Errorf("emitting methods.go: %w", err)
+	}
+	return append(files,
+		emitFile{name: "params.go", src: paramsBytes},
+		emitFile{name: "methods.go", src: methodsBytes},
+	), nil
+}
+
+// writeFiles writes each emitFile into outDir, logging progress when verbose.
+//
+//nolint:revive // verbose is a logging-output toggle, not a control flag.
+func writeFiles(files []emitFile, outDir string, verbose bool) error {
 	for _, f := range files {
 		outPath := filepath.Join(outDir, f.name)
-		if err := os.WriteFile(outPath, f.src, 0o644); err != nil {
+		if err := os.WriteFile(outPath, f.src, outFileMode); err != nil {
 			return fmt.Errorf("writing %s: %w", outPath, err)
 		}
-		if cfg.verbose {
+		if verbose {
 			fmt.Fprintf(os.Stderr, "schemar: wrote %s (%d bytes)\n", outPath, len(f.src))
 		}
 	}
-
-	// ── Step 9: go vet sanity check (non-fatal) ───────────────────────────────
-	// The hard compile gate is in Task #11 (E2E). This is a quick sanity check.
-
-	if goPath, err := exec.LookPath("go"); err == nil {
-		cmd := exec.Command(goPath, "vet", "./...")
-		cmd.Dir = outDir
-		if out, err := cmd.CombinedOutput(); err != nil {
-			fmt.Fprintf(os.Stderr, "schemar: go vet warning (output may not compile cleanly):\n%s\n", out)
-		} else if cfg.verbose {
-			fmt.Fprintf(os.Stderr, "schemar: go vet passed\n")
-		}
-	}
-
 	return nil
+}
+
+// runGoVet runs "go vet" over the generated package as a non-fatal sanity
+// check. The hard compile gate lives in the E2E tests.
+func runGoVet(outDir string, verbose bool) {
+	goPath, err := exec.LookPath("go")
+	if err != nil {
+		return
+	}
+	cmd := exec.CommandContext(context.Background(), goPath, "vet", "./...")
+	cmd.Dir = outDir
+	out, err := cmd.CombinedOutput()
+	switch {
+	case err != nil:
+		fmt.Fprintf(os.Stderr, "schemar: go vet warning (output may not compile cleanly):\n%s\n", out)
+	case verbose:
+		fmt.Fprintln(os.Stderr, "schemar: go vet passed")
+	default:
+		// go vet succeeded; stay quiet unless verbose.
+	}
 }
 
 // printUsage writes the top-level usage text to w.
