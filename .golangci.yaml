@@ -1,0 +1,473 @@
+# https://golangci-lint.run/docs/configuration/file/
+# https://golangci-lint.run/docs/linters/configuration/
+# https://golangci-lint.run/docs/formatters/configuration/
+
+# yaml-language-server: $schema=https://raw.githubusercontent.com/golangci/golangci-lint/refs/heads/main/jsonschema/golangci.next.jsonschema.json
+---
+version: "2"
+
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+  relative-path-mode: gomod
+  tests: true
+  issues-exit-code: 1
+  allow-parallel-runners: true
+
+output:
+  formats:
+    text:
+      path: stdout
+      print-linter-name: true
+      print-issued-lines: true
+      colors: true
+  sort-order:
+    - severity
+    - linter
+    - file
+  show-stats: true
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  uniq-by-line: false
+  fix: false
+
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+
+  settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - prefix(github.com/zchee/schemar)
+        - blank
+        - dot
+      custom-order: true
+      no-lex-order: false
+    gofmt:
+      simplify: true
+      rewrite-rules:
+        - pattern: "interface{}"
+          replacement: "any"
+        - pattern: "a[b:len(a)]"
+          replacement: "a[b:]"
+    gofumpt:
+      module-path: github.com/zchee/schemar
+      extra-rules: true
+    goimports:
+      local-prefixes:
+        - github.com/zchee/schemar
+
+  exclusions:
+    generated: strict
+    warn-unused: true
+    paths:
+      - vendor
+      - third_party
+      - \.pb\.go$
+      - \.gen\.go$
+
+linters:
+  default: all
+
+  disable:
+    - depguard
+    - err113
+    - exhaustruct
+    - gocheckcompilerdirectives
+    - gochecknoglobals
+    - gomoddirectives
+    - gomodguard
+    - nlreturn
+    - noinlineerr
+    - staticcheck
+    - varnamelen
+    - wsl
+    - wsl_v5
+
+  settings:
+    errcheck:
+      check-type-assertions: true
+      check-blank: true
+      disable-default-exclusions: true
+
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment
+        - shadow
+
+    staticcheck:
+      checks:
+        - all
+
+    gosec:
+      severity: low
+      confidence: low
+      excludes: []
+
+    cyclop:
+      max-complexity: 15
+      package-average: 10.0
+
+    gocyclo:
+      min-complexity: 15
+
+    gocognit:
+      min-complexity: 20
+
+    nestif:
+      min-complexity: 4
+
+    funlen:
+      lines: 80
+      statements: 50
+      ignore-comments: true
+
+    maintidx:
+      under: 20
+
+    lll:
+      line-length: 150
+      tab-width: 4
+
+    nakedret:
+      max-func-lines: 0
+
+    nolintlint:
+      require-explanation: true
+      require-specific: true
+      allow-no-explanation: []
+      allow-unused: false
+
+    dupl:
+      threshold: 100
+
+    goconst:
+      min-len: 3
+      min-occurrences: 5
+      numbers: true
+      ignore-calls: false
+
+    misspell:
+      locale: US
+
+    godot:
+      scope: declarations
+      capital: true
+      period: true
+
+    godox:
+      keywords:
+        - TODO
+        - FIXME
+        - HACK
+        - XXX
+        - BUG
+
+    errorlint:
+      errorf: true
+      errorf-multi: true
+      asserts: true
+      comparison: true
+
+    wrapcheck:
+      ignore-sigs:
+        - .Errorf(
+        - errors.New(
+        - errors.Unwrap(
+        - errors.Join(
+        - .Wrap(
+        - .Wrapf(
+        - .WithMessage(
+        - .WithMessagef(
+        - .WithStack(
+
+    exhaustive:
+      check:
+        - switch
+        - map
+      default-signifies-exhaustive: false
+      explicit-exhaustive-switch: false
+      explicit-exhaustive-map: false
+
+    exhaustruct:
+      exclude:
+        - "^net/http\\.Client$"
+        - "^net/http\\.Cookie$"
+        - "^net/http\\.Request$"
+        - "^net/http\\.Response$"
+        - "^net/http\\.Server$"
+        - "^net/http\\.Transport$"
+        - "^net/url\\.URL$"
+        - "^os/exec\\.Cmd$"
+        - "^reflect\\.StructField$"
+        - "^github\\.com/Shopify/sarama\\.Config$"
+        - "^github\\.com/Shopify/sarama\\.ProducerMessage$"
+
+    mnd:
+      checks:
+        - argument
+        - case
+        - condition
+        - operation
+        - return
+        - assign
+      ignored-numbers:
+        - "0"
+        - "1"
+        - "2"
+        - "10"
+        - "100"
+        - "1000"
+      ignored-functions:
+        - strings.SplitN
+        - bytes.SplitN
+        - make
+        - context.WithTimeout
+
+    # varnamelen:
+    #   min-name-length: 2
+    #   check-receiver: false
+    #   check-return: true
+    #   check-type-param: true
+    #   ignore-type-assert-ok: true
+    #   ignore-map-index-ok: true
+    #   ignore-chan-recv-ok: true
+    #   ignore-names:
+    #     - err
+    #     - ok
+    #     - id
+    #     - i
+    #     - j
+    #     - k
+    #     - tt
+    #     - tc
+    #   ignore-decls:
+    #     - c echo.Context
+    #     - t testing.T
+    #     - b testing.B
+    #     - f *foo.Bar
+    #     - e error
+    #     - i int
+    #     - r io.Reader
+    #     - w io.Writer
+
+    paralleltest:
+      ignore-missing: false
+      ignore-missing-subtests: false
+
+    testifylint:
+      enable-all: true
+
+    thelper: {}
+
+    usetesting:
+      os-setenv: true
+      os-temp-dir: true
+      os-create-temp: true
+      os-mkdir-temp: true
+
+    revive:
+      severity: warning
+      enable-all-rules: true
+      rules:
+        - name: add-constant
+          disabled: true # dups: mnd
+        - name: cognitive-complexity
+          disabled: true # dups: gocognit
+        - name: cyclomatic
+          disabled: true # dups: cyclop / gocyclo
+        - name: function-length
+          disabled: true # dups: funlen
+        - name: line-length-limit
+          disabled: true # dups: lll
+        - name: max-public-structs
+          disabled: true
+        - name: file-header
+          disabled: true
+        - name: banned-characters
+          disabled: true
+        - name: argument-limit
+          arguments: [6]
+        - name: function-result-limit
+          arguments: [4]
+        - name: max-control-nesting
+          arguments: [5]
+        - name: unhandled-error
+          arguments:
+            - "fmt.Print.*"
+            - "fmt.Fprint.*"
+            - "bytes.Buffer.Write.*"
+            - "strings.Builder.Write.*"
+
+    gocritic:
+      enable-all: true
+      disabled-checks:
+        - hugeParam
+        - rangeValCopy
+        - whyNoLint
+      settings:
+        captLocal:
+          paramsOnly: false
+        elseif:
+          skipBalanced: false
+        underef:
+          skipRecvDeref: false
+
+    tagliatelle:
+      case:
+        rules:
+          json: snake
+          yaml: snake
+          xml: camel
+          bson: camel
+          avro: snake
+          mapstructure: snake
+          env: upperSnake
+          envconfig: upperSnake
+        use-field-name: true
+
+    importas:
+      no-unaliased: true
+      no-extra-aliases: false
+
+    perfsprint:
+      integer-format: true
+      err-error: true
+      errorf: true
+      sprintf1: true
+      strconcat: true
+
+    prealloc:
+      simple: true
+      range-loops: true
+      for-loops: true
+
+    ireturn:
+      allow:
+        - anon
+        - error
+        - empty
+        - stdlib
+        - generic
+
+    godoclint:
+      options:
+        max-len:
+          length: 120
+      enable:
+        - pkg-doc
+        - single-pkg-doc
+        - require-pkg-doc
+        - start-with-name
+        - require-doc
+        - deprecated
+        - max-len
+        - no-unused-link
+        - require-stdlib-doclink
+
+    # modernize:
+    #   disable:
+    #     - f
+
+    inamedparam:
+      skip-single-param: true
+
+    sloglint:
+      no-mixed-args: true
+      kv-only: false
+      attr-only: true
+      no-global: all
+      context: scope
+      static-msg: true
+      key-naming-case: snake
+      forbidden-keys:
+        - time
+        - level
+        - msg
+        - source
+
+  exclusions:
+    generated: strict
+    warn-unused: true
+    presets:
+      - common-false-positives
+      - std-error-handling
+    rules:
+      - path: _test\.go
+        linters:
+          - bodyclose
+          - cyclop
+          - dupl
+          - err113
+          - errcheck
+          - exhaustruct
+          - forcetypeassert
+          - funlen
+          - gochecknoglobals
+          - gochecknoinits
+          - gocognit
+          - goconst
+          - gocyclo
+          - godoclint
+          - gosec
+          - lll
+          - maintidx
+          - mnd
+          - nlreturn
+          - noctx
+          - paralleltest
+          - revive
+          - varnamelen
+          - wrapcheck
+          - wsl_v5
+
+      - path: (.+)_mock\.go$
+        linters: [all]
+      - path: testdata/
+        linters: [all]
+      - path: \.pb\.go$
+        linters: [all]
+      - path: \.gen\.go$
+        linters: [all]
+
+      - path: (cmd|main)/
+        linters:
+          - gochecknoglobals
+          - gochecknoinits
+          - forbidigo
+
+      - linters:
+          - lll
+        source: "^//\\s*go:generate "
+
+      - linters:
+          - staticcheck
+        text: "ST1000:" # at least one file in a package should have a package comment
+
+    paths:
+      - vendor
+      - third_party
+      - builtin$
+      - examples$
+
+severity:
+  default: error
+  rules:
+    - linters:
+        - dupl
+        - godox
+        - lll
+        - funlen
+        - gocognit
+        - gocyclo
+        - cyclop
+        - maintidx
+      severity: warning
