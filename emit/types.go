@@ -96,20 +96,24 @@ func buildTypesData(irData *ir.IR) typesData {
 	allTypes = append(allTypes, irData.Schemas...)
 	allTypes = append(allTypes, irData.InlineTypes...)
 
-	hasStrategyBUnion := false
-	for _, nt := range allTypes {
-		if nt.Kind == ir.KindUnion && !anyPrimitiveVariant(nt.UnionVariants) {
-			hasStrategyBUnion = true
-			break
-		}
-	}
-
 	return typesData{
 		PackageName:       irData.PackageName,
-		Imports:           computeImports(allTypes, hasStrategyBUnion),
+		Imports:           computeImports(allTypes),
 		AllTypes:          allTypes,
-		HasStrategyBUnion: hasStrategyBUnion,
+		HasStrategyBUnion: hasStrategyBUnion(allTypes),
 	}
+}
+
+// hasStrategyBUnion reports whether any type uses union Strategy B (a wrapper
+// struct with one *T per variant), which requires the go-json-experiment
+// imports and the union helper declarations.
+func hasStrategyBUnion(types []ir.NamedType) bool {
+	for _, nt := range types {
+		if nt.Kind == ir.KindUnion && !anyPrimitiveVariant(nt.UnionVariants) {
+			return true
+		}
+	}
+	return false
 }
 
 // anyPrimitiveVariant returns true when any variant in the slice is a primitive,
@@ -123,18 +127,16 @@ func anyPrimitiveVariant(variants []ir.UnionVariant) bool {
 	return false
 }
 
-// computeImports builds a sorted import-declaration list from the types and
-// the union strategy flag.  Standard library imports come first, then
-// third-party imports; each group is sorted alphabetically by import path.
-//
-//nolint:revive // hasStrategyBUnion is a data signal (the type set needs the json imports), not a behavior toggle.
-func computeImports(types []ir.NamedType, hasStrategyBUnion bool) []string {
+// computeImports builds a sorted import-declaration list from the types.
+// Standard library imports come first, then third-party imports; each group
+// is sorted alphabetically by import path.
+func computeImports(types []ir.NamedType) []string {
 	paths := make(map[string]string) // path → alias (empty string = no alias)
 
 	if typesNeedTime(types) {
 		paths["time"] = ""
 	}
-	if hasStrategyBUnion {
+	if hasStrategyBUnion(types) {
 		paths["github.com/go-json-experiment/json"] = "json"
 		paths["github.com/go-json-experiment/json/jsontext"] = ""
 	}
