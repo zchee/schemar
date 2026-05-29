@@ -15,25 +15,14 @@
 package emit_test
 
 import (
-	"go/format"
 	"strings"
 	"testing"
 
 	gocmp "github.com/google/go-cmp/cmp"
+
 	"github.com/zchee/schemar/emit"
 	"github.com/zchee/schemar/ir"
 )
-
-// normGo formats a Go source string via go/format so comparisons are
-// whitespace-invariant.
-func normGo(t *testing.T, src string) string {
-	t.Helper()
-	b, err := format.Source([]byte(src))
-	if err != nil {
-		t.Fatalf("normGo: %v\n--- source ---\n%s", err, src)
-	}
-	return string(b)
-}
 
 // ── Client() ─────────────────────────────────────────────────────────────────
 
@@ -44,7 +33,8 @@ func TestClient_PackageName(t *testing.T) {
 		t.Fatalf("Client: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		"package myapi",
 		"type Client struct",
 		"func New(baseURL string",
@@ -109,10 +99,11 @@ func TestMethods_SimpleGET(t *testing.T) {
 		t.Fatalf("Methods: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		"func (c *Client) GetWidget(ctx context.Context) (*Widget, error)",
 		`path := "/widgets"`,
-		`c.do(ctx, "GET", path, nil, nil, &out)`,
+		`c.do(ctx, "GET", path, nil, nil, &out)`, //nolint:dupword // asserts generated do() call args; the repeated nil is required
 	)
 }
 
@@ -136,7 +127,8 @@ func TestMethods_PathParams(t *testing.T) {
 	}
 	src := string(out)
 	// Path param GoName "ID" → paramVarName → "id".
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		"func (c *Client) GetById(ctx context.Context, id string) (*Item, error)",
 		"strings.NewReplacer(",
 		`"{id}", url.PathEscape(id)`,
@@ -164,7 +156,8 @@ func TestMethods_InitialismPathParam(t *testing.T) {
 	}
 	src := string(out)
 	// "APIVersion" → paramVarName → "apiVersion"
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		"func (c *Client) GetVersion(ctx context.Context, apiVersion string) (*Resource, error)",
 		`"{api_version}", url.PathEscape(apiVersion)`,
 	)
@@ -189,7 +182,8 @@ func TestMethods_QueryParams(t *testing.T) {
 		t.Fatalf("Methods: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		"func (c *Client) ListWidgets(ctx context.Context, params *ListWidgetsParams) (*WidgetList, error)",
 		"var query url.Values",
 		"params.encode()",
@@ -214,7 +208,8 @@ func TestMethods_RequestBody(t *testing.T) {
 		t.Fatalf("Methods: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		"func (c *Client) CreateWidget(ctx context.Context, body *CreateWidgetRequest) (*Widget, error)",
 		`c.do(ctx, "POST", path, nil, body, &out)`,
 	)
@@ -239,9 +234,10 @@ func TestMethods_NoJSONResponse(t *testing.T) {
 		t.Fatalf("Methods: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		"func (c *Client) DeleteWidget(ctx context.Context, id string) (*http.Response, error)",
-		`return c.do(ctx, "DELETE", path, nil, nil, nil)`,
+		`return c.do(ctx, "DELETE", path, nil, nil, nil)`, //nolint:dupword // asserts generated do() call args; repeated nil is required
 	)
 }
 
@@ -270,7 +266,8 @@ func TestMethods_AllArgsOperation(t *testing.T) {
 		t.Fatalf("Methods: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		"func (c *Client) UpdateItem(ctx context.Context, version string, id string, params *UpdateItemParams, body *UpdateItemRequest) (*Item, error)",
 		`"{version}", url.PathEscape(version)`,
 		`"{id}", url.PathEscape(id)`,

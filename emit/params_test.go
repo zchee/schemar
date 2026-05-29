@@ -20,6 +20,7 @@ import (
 	"testing"
 
 	gocmp "github.com/google/go-cmp/cmp"
+
 	"github.com/zchee/schemar/emit"
 	"github.com/zchee/schemar/ir"
 )
@@ -103,7 +104,8 @@ func TestParams_StringField(t *testing.T) {
 		t.Fatalf("Params: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		`type ListWidgetsParams struct`,
 		`form:"name"`,
 		`func (p *ListWidgetsParams) encode() url.Values`,
@@ -130,7 +132,8 @@ func TestParams_BoolField(t *testing.T) {
 		t.Fatalf("Params: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		`strconv.FormatBool(p.Verbose)`,
 		`"strconv"`,
 	)
@@ -168,7 +171,8 @@ func TestParams_PointerField(t *testing.T) {
 		t.Fatalf("Params: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		`Limit *int64`,
 		`if p.Limit != nil`,
 		`strconv.FormatInt(*p.Limit, 10)`,
@@ -190,7 +194,8 @@ func TestParams_BoolPointer(t *testing.T) {
 		t.Fatalf("Params: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		`Enabled *bool`,
 		`if p.Enabled != nil`,
 		`strconv.FormatBool(*p.Enabled)`,
@@ -212,7 +217,8 @@ func TestParams_SliceField(t *testing.T) {
 		t.Fatalf("Params: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		`Tags []string`,
 		`form:"tags"`,
 		`for _, v := range p.Tags`,
@@ -235,7 +241,8 @@ func TestParams_TimeField(t *testing.T) {
 		t.Fatalf("Params: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		`Since time.Time`,
 		`"time"`,
 		`.Format(time.RFC3339)`,
@@ -258,7 +265,8 @@ func TestParams_HeaderField(t *testing.T) {
 		t.Fatalf("Params: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		`header:"X-Request-Id"`,
 		`func (p *GetWidgetParams) encodeHeaders() http.Header`,
 		`h.Set("X-Request-Id"`,
@@ -289,7 +297,8 @@ func TestParams_MultipleOps(t *testing.T) {
 		t.Fatalf("Params: %v", err)
 	}
 	src := string(out)
-	containsAll(t, src,
+	containsAll(
+		t, src,
 		`type ListWidgetsParams struct`,
 		`type SearchWidgetsParams struct`,
 	)

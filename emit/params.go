@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package emit contains emitters that convert a schemar IR into Go source files
-// using text/template and go/format.
 package emit
 
 import (
@@ -80,7 +78,7 @@ type paramFieldData struct {
 // for header parameters. A separate `encodeHeaders() http.Header` method
 // handles header-only encoding; `encode() url.Values` handles query params.
 //
-// If go/format.Source fails the unformatted source is returned alongside the
+// If [go/format.Source] fails the unformatted source is returned alongside the
 // error so the caller can write a .broken file for debugging.
 func Params(irResult *ir.IR, pkgName string) ([]byte, error) {
 	tmpl, err := template.New("params").Parse(paramsTmplSrc)
@@ -112,9 +110,7 @@ func buildParamsData(irResult *ir.IR, pkgName string) paramsData {
 	data := paramsData{Package: pkgName}
 
 	for _, op := range irResult.Operations {
-		hasQuery := len(op.QueryParams) > 0
-		hasHeader := len(op.HeaderParams) > 0
-		if !hasQuery && !hasHeader {
+		if len(op.QueryParams) == 0 && len(op.HeaderParams) == 0 {
 			continue
 		}
 
@@ -122,58 +118,63 @@ func buildParamsData(irResult *ir.IR, pkgName string) paramsData {
 			Name:     op.GoName + "Params",
 			OpGoName: op.GoName,
 		}
-
-		// Query params → form tag + encode() body.
-		for _, param := range op.QueryParams {
-			fd := paramFieldData{
-				GoName:     param.GoName,
-				GoType:     param.GoType.Name,
-				IsPointer:  param.IsPointer,
-				IsEnum:     param.GoType.IsEnum,
-				StructTag:  `form:"` + param.Name + `"`,
-				DocComment: param.DocComment,
-			}
-			block := computeEncodeBlock(fd.GoName, fd.GoType, param.Name, fd.IsPointer, fd.IsEnum, false)
-			if block != "" {
-				structData.Fields = append(structData.Fields, fd)
-				structData.QueryEncodeBlocks = append(structData.QueryEncodeBlocks, block)
-				if needsStrconv(fd.GoType) {
-					data.NeedsStrconv = true
-				}
-				if strings.Contains(fd.GoType, "time.Time") {
-					data.NeedsTime = true
-				}
-			}
-		}
-
-		// Header params → header tag + encodeHeaders() body.
-		for _, param := range op.HeaderParams {
-			fd := paramFieldData{
-				GoName:     param.GoName,
-				GoType:     param.GoType.Name,
-				IsPointer:  param.IsPointer,
-				IsEnum:     param.GoType.IsEnum,
-				StructTag:  `header:"` + param.Name + `"`,
-				DocComment: param.DocComment,
-			}
-			block := computeEncodeBlock(fd.GoName, fd.GoType, param.Name, fd.IsPointer, fd.IsEnum, true)
-			if block != "" {
-				structData.Fields = append(structData.Fields, fd)
-				structData.HeaderEncodeBlocks = append(structData.HeaderEncodeBlocks, block)
-			}
-		}
-
+		appendParamFields(&data, &structData, op)
 		data.Structs = append(data.Structs, structData)
 	}
 	return data
 }
 
+// appendParamFields populates structData with the query and header parameter
+// fields of op, recording the strconv/time import needs on data.
+func appendParamFields(data *paramsData, structData *paramsStructData, op ir.Operation) {
+	for _, param := range op.QueryParams {
+		fd := newParamField(param, "form")
+		block := computeEncodeBlock(fd.GoName, fd.GoType, param.Name, fd.IsPointer, fd.IsEnum, false)
+		if block == "" {
+			continue
+		}
+		structData.Fields = append(structData.Fields, fd)
+		structData.QueryEncodeBlocks = append(structData.QueryEncodeBlocks, block)
+		if needsStrconv(fd.GoType) {
+			data.NeedsStrconv = true
+		}
+		if strings.Contains(fd.GoType, "time.Time") {
+			data.NeedsTime = true
+		}
+	}
+
+	for _, param := range op.HeaderParams {
+		fd := newParamField(param, "header")
+		block := computeEncodeBlock(fd.GoName, fd.GoType, param.Name, fd.IsPointer, fd.IsEnum, true)
+		if block == "" {
+			continue
+		}
+		structData.Fields = append(structData.Fields, fd)
+		structData.HeaderEncodeBlocks = append(structData.HeaderEncodeBlocks, block)
+	}
+}
+
+// newParamField builds a paramFieldData for param using the given struct-tag
+// key ("form" for query parameters, "header" for header parameters).
+func newParamField(param ir.Param, tagKey string) paramFieldData {
+	return paramFieldData{
+		GoName:     param.GoName,
+		GoType:     param.GoType.Name,
+		IsPointer:  param.IsPointer,
+		IsEnum:     param.GoType.IsEnum,
+		StructTag:  tagKey + `:"` + param.Name + `"`,
+		DocComment: param.DocComment,
+	}
+}
+
 // computeEncodeBlock produces the Go code fragment for encoding one field.
-// isEnum indicates the named type is a string enum (string cast is valid).
-// isHeader selects between h.Set (header) and q.Set (query) calls.
+// IsEnum indicates the named type is a string enum (string cast is valid).
+// IsHeader selects between h.Set (header) and q.Set (query) calls.
 // Generated code uses no reflect — only direct field access and strconv/time.
-// Returns an empty string for types that cannot be safely serialised to a URL
+// Returns an empty string for types that cannot be safely serialized to a URL
 // query string (maps, objects, anonymous structs); callers must skip such fields.
+//
+//nolint:revive // isPointer, isEnum and isHeader describe the encoded Go type shape (data attributes), not caller behavior.
 func computeEncodeBlock(goName, goType, paramName string, isPointer, isEnum, isHeader bool) string {
 	varExpr := "p." + goName
 	setter := "q"
@@ -229,9 +230,11 @@ func computeEncodeBlock(goName, goType, paramName string, isPointer, isEnum, isH
 
 // scalarEncodeExpr returns the Go expression that converts expr (of goType) to
 // a string for use in URL query values or HTTP headers.
-// isEnum must be true for named types that are KindEnum; for those, string(x)
+// IsEnum must be true for named types that are KindEnum; for those, string(x)
 // is a valid cast. For all other non-primitive named types (structs, maps) the
 // function returns an empty string to signal "skip field".
+//
+//nolint:revive // isEnum marks named string-enum types whose string(x) cast is valid; a type attribute, not behavior.
 func scalarEncodeExpr(goType, expr string, isEnum bool) string {
 	switch goType {
 	case "string":

@@ -106,6 +106,7 @@ func TestRenderTypes_Struct(t *testing.T) {
 				},
 			},
 			check: func(t *testing.T, got string) {
+				t.Helper()
 				assertContains(t, got, `type Agent struct`)
 				assertContains(t, got, `// Agent corresponds to the OpenAPI schema "Agent".`)
 				// gofmt aligns columns — check name and tag appear on same line.
@@ -126,6 +127,7 @@ func TestRenderTypes_Struct(t *testing.T) {
 				},
 			},
 			check: func(t *testing.T, got string) {
+				t.Helper()
 				// *bool / *int64 pointer fields.
 				assertLine(t, got, "PredefinedRole", "*bool", `json:"predefined_role,omitzero"`)
 				assertLine(t, got, "CreatedAt", "*int64", `json:"created_at,omitzero"`)
@@ -142,6 +144,7 @@ func TestRenderTypes_Struct(t *testing.T) {
 				},
 			},
 			check: func(t *testing.T, got string) {
+				t.Helper()
 				assertContains(t, got, `"time"`)
 				assertLine(t, got, "Created", "time.Time", `json:"created,omitzero"`)
 				assertLine(t, got, "Updated", "*time.Time", `json:"updated,omitzero"`)
@@ -158,6 +161,7 @@ func TestRenderTypes_Struct(t *testing.T) {
 				},
 			},
 			check: func(t *testing.T, got string) {
+				t.Helper()
 				assertContains(t, got, `type ExtendedAgent struct`)
 				// Embedded field has no json tag — verify Agent appears but never with a backtick-tag on same line.
 				if lineContainsAll(got, "Agent", "`") {
@@ -182,6 +186,7 @@ func TestRenderTypes_Struct(t *testing.T) {
 				},
 			},
 			check: func(t *testing.T, got string) {
+				t.Helper()
 				assertContains(t, got, `// Timeout in milliseconds.`)
 				assertLine(t, got, "Timeout", `json:"timeout,omitzero"`)
 			},
@@ -220,6 +225,7 @@ func TestRenderTypes_Enum(t *testing.T) {
 				},
 			},
 			check: func(t *testing.T, got string) {
+				t.Helper()
 				assertContains(t, got, `type AudioResponseFormat string`)
 				assertContains(t, got, `const (`)
 				assertContains(t, got, `// Enum values for AudioResponseFormat.`)
@@ -241,6 +247,7 @@ func TestRenderTypes_Enum(t *testing.T) {
 				},
 			},
 			check: func(t *testing.T, got string) {
+				t.Helper()
 				assertContains(t, got, `type StatusCode int64`)
 				assertLine(t, got, "StatusCodeOK", "200")
 				assertLine(t, got, "StatusCodeNotFound", "404")

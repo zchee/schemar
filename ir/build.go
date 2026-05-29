@@ -17,7 +17,7 @@ package ir
 import (
 	"fmt"
 	"path"
-	"sort"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -26,6 +26,13 @@ import (
 	"github.com/pb33f/libopenapi/orderedmap"
 
 	"github.com/zchee/schemar/naming"
+)
+
+// Go builtin type names referenced when constructing TypeRef values.
+const (
+	goTypeAny    = "any"
+	goTypeString = "string"
+	goTypeInt32  = "int32"
 )
 
 // builder accumulates state during a single IR construction pass.
@@ -56,74 +63,100 @@ func Build(doc *v3high.Document) (*IR, []Diagnostic, error) {
 		seenOpGoNames: make(map[string]bool),
 	}
 
-	// Derive package name from spec info.
-	if doc.Info != nil {
-		b.ir.PackageName = naming.GoPackageName(doc.Info.Title)
+	b.ir.PackageName = derivePackageName(doc)
+	b.registerSchemaKinds(doc)
+	if err := b.buildSchemas(doc); err != nil {
+		return nil, b.diags, err
 	}
-	if b.ir.PackageName == "" {
-		b.ir.PackageName = "apiclient"
-	}
-
-	// Pre-pass: register every component schema name and classify its kind so
-	// that isNonNilable() works correctly for forward-reference $refs in pass 1.
-	if doc.Components != nil && doc.Components.Schemas != nil {
-		for name, proxy := range doc.Components.Schemas.FromOldest() {
-			goName := naming.GoExported(name)
-			b.allTypeNames[goName] = true
-			b.typeKinds[goName] = preClassifyKind(proxy)
-		}
-	}
-
-	// Pass 1: build NamedTypes from components/schemas in spec order.
-	if doc.Components != nil && doc.Components.Schemas != nil {
-		for name, proxy := range doc.Components.Schemas.FromOldest() {
-			nt, err := b.buildTopLevelSchema(name, proxy)
-			if err != nil {
-				return nil, b.diags, fmt.Errorf("ir: schema %q: %w", name, err)
-			}
-			b.typeKinds[nt.Name] = nt.Kind // update with the real kind
-			b.ir.Schemas = append(b.ir.Schemas, nt)
-		}
-	}
-
-	// Pass 2: build Operations from paths in spec order.
-	if doc.Paths != nil && doc.Paths.PathItems != nil {
-		for pathStr, pi := range doc.Paths.PathItems.FromOldest() {
-			for _, pair := range pathItemOps(pi) {
-				merged := mergeParams(pi.Parameters, pair.op.Parameters)
-				op, err := b.buildOperation(pathStr, pair.method, pair.op, merged)
-				if err != nil {
-					b.diagWarn(fmt.Sprintf("operation %s %s: %v", pair.method, pathStr, err), pathStr)
-					continue
-				}
-				if op != nil {
-					b.ir.Operations = append(b.ir.Operations, *op)
-				}
-			}
-		}
-	}
-
-	// Emit deferred-feature diagnostics for callbacks and webhooks.
-	if doc.Components != nil {
-		if orderedmap.Len(doc.Components.Callbacks) > 0 {
-			b.diagWarn("callbacks in components are not supported in v1; skipped", "components/callbacks")
-		}
-		if orderedmap.Len(doc.Components.PathItems) > 0 {
-			b.diagWarn("component path items (webhooks) are not supported in v1; skipped", "components/pathItems")
-		}
-	}
+	b.buildOperations(doc)
+	b.emitDeferredDiagnostics(doc)
 
 	b.ir.InlineTypes = b.inlineTypes
-
-	// Sort diagnostics for deterministic output.
-	sort.Slice(b.diags, func(i, j int) bool {
-		if b.diags[i].Location != b.diags[j].Location {
-			return b.diags[i].Location < b.diags[j].Location
-		}
-		return b.diags[i].Message < b.diags[j].Message
-	})
+	b.sortDiagnostics()
 
 	return b.ir, b.diags, nil
+}
+
+// derivePackageName resolves the generated package name from the spec info
+// title, falling back to "apiclient" when absent.
+func derivePackageName(doc *v3high.Document) string {
+	if doc.Info != nil {
+		if name := naming.GoPackageName(doc.Info.Title); name != "" {
+			return name
+		}
+	}
+	return "apiclient"
+}
+
+// registerSchemaKinds runs the pre-pass that registers every component schema
+// name and classifies its kind so isNonNilable resolves forward references.
+func (b *builder) registerSchemaKinds(doc *v3high.Document) {
+	if doc.Components == nil || doc.Components.Schemas == nil {
+		return
+	}
+	for name, proxy := range doc.Components.Schemas.FromOldest() {
+		goName := naming.GoExported(name)
+		b.allTypeNames[goName] = true
+		b.typeKinds[goName] = preClassifyKind(proxy)
+	}
+}
+
+// buildSchemas runs pass 1, building a NamedType for each component schema in
+// spec order.
+func (b *builder) buildSchemas(doc *v3high.Document) error {
+	if doc.Components == nil || doc.Components.Schemas == nil {
+		return nil
+	}
+	for name, proxy := range doc.Components.Schemas.FromOldest() {
+		nt, err := b.buildTopLevelSchema(name, proxy)
+		if err != nil {
+			return fmt.Errorf("ir: schema %q: %w", name, err)
+		}
+		b.typeKinds[nt.Name] = nt.Kind
+		b.ir.Schemas = append(b.ir.Schemas, nt)
+	}
+	return nil
+}
+
+// buildOperations runs pass 2, building an Operation for each path item method
+// in spec order.
+func (b *builder) buildOperations(doc *v3high.Document) {
+	if doc.Paths == nil || doc.Paths.PathItems == nil {
+		return
+	}
+	for pathStr, pi := range doc.Paths.PathItems.FromOldest() {
+		for _, pair := range pathItemOps(pi) {
+			merged := mergeParams(pi.Parameters, pair.op.Parameters)
+			if op := b.buildOperation(pathStr, pair.method, pair.op, merged); op != nil {
+				b.ir.Operations = append(b.ir.Operations, *op)
+			}
+		}
+	}
+}
+
+// emitDeferredDiagnostics records warnings for component features deferred
+// past v1 (callbacks and webhook path items).
+func (b *builder) emitDeferredDiagnostics(doc *v3high.Document) {
+	if doc.Components == nil {
+		return
+	}
+	if orderedmap.Len(doc.Components.Callbacks) > 0 {
+		b.diagWarn("callbacks in components are not supported in v1; skipped", "components/callbacks")
+	}
+	if orderedmap.Len(doc.Components.PathItems) > 0 {
+		b.diagWarn("component path items (webhooks) are not supported in v1; skipped", "components/pathItems")
+	}
+}
+
+// sortDiagnostics orders diagnostics by location then message for
+// byte-deterministic output.
+func (b *builder) sortDiagnostics() {
+	slices.SortFunc(b.diags, func(a, c Diagnostic) int {
+		if a.Location != c.Location {
+			return strings.Compare(a.Location, c.Location)
+		}
+		return strings.Compare(a.Message, c.Message)
+	})
 }
 
 // preClassifyKind performs a shallow classification of a SchemaProxy so that
@@ -187,7 +220,7 @@ func (b *builder) buildTopLevelSchema(name string, proxy *highbase.SchemaProxy) 
 			OriginalName: name,
 			Kind:         KindAlias,
 			DocComment:   docComment,
-			AliasTarget:  &TypeRef{Name: "any", IsBuiltin: true},
+			AliasTarget:  &TypeRef{Name: goTypeAny, IsBuiltin: true},
 		}, nil
 	}
 
@@ -247,13 +280,13 @@ func (b *builder) schemaToNamedType(goName, originalName string, schema *highbas
 	}
 
 	// Fallback: any.
-	b.diagWarn(fmt.Sprintf("unrecognised schema shape (type=%q); treated as any", pt), "components/schemas/"+originalName)
+	b.diagWarn(fmt.Sprintf("unrecognized schema shape (type=%q); treated as any", pt), "components/schemas/"+originalName)
 	return NamedType{
 		Name:         goName,
 		OriginalName: originalName,
 		Kind:         KindAlias,
 		DocComment:   docComment,
-		AliasTarget:  &TypeRef{Name: "any", IsBuiltin: true},
+		AliasTarget:  &TypeRef{Name: goTypeAny, IsBuiltin: true},
 	}, nil
 }
 
@@ -298,7 +331,7 @@ func (b *builder) buildField(jsonName string, proxy *highbase.SchemaProxy, isReq
 }
 
 // buildEnumNamedType builds a KindEnum NamedType.
-func (b *builder) buildEnumNamedType(goName, originalName string, schema *highbase.Schema, docComment string) NamedType {
+func (*builder) buildEnumNamedType(goName, originalName string, schema *highbase.Schema, docComment string) NamedType {
 	underlying := enumUnderlyingType(schema)
 	var values []EnumValue
 	for _, node := range schema.Enum {
@@ -318,55 +351,36 @@ func (b *builder) buildEnumNamedType(goName, originalName string, schema *highba
 	}
 }
 
+// embeddedRefField builds an embedded Field for a $ref allOf component.
+func embeddedRefField(sub *highbase.SchemaProxy) Field {
+	refName := refToTypeName(sub.GetReference())
+	goRefName := naming.GoExported(refName)
+	return Field{
+		Name:       goRefName,
+		JSONName:   "",
+		GoType:     TypeRef{Name: goRefName},
+		IsEmbedded: true,
+		DocComment: "allOf embedded from " + refName + ".",
+	}
+}
+
 // buildAllOfNamedType builds a KindStruct NamedType for an allOf schema.
 // When all allOf components are $refs, Go struct embedding is used; otherwise
 // their fields are flattened into one struct.
 func (b *builder) buildAllOfNamedType(goName, originalName string, schema *highbase.Schema, docComment string) NamedType {
-	allRefs := true
-	for _, sub := range schema.AllOf {
-		if !sub.IsReference() {
-			allRefs = false
-			break
-		}
-	}
-
 	var fields []Field
-	if allRefs {
-		for _, sub := range schema.AllOf {
-			refName := refToTypeName(sub.GetReference())
-			goRefName := naming.GoExported(refName)
-			fields = append(fields, Field{
-				Name:       goRefName,
-				JSONName:   "",
-				GoType:     TypeRef{Name: goRefName},
-				IsEmbedded: true,
-				DocComment: "allOf embedded from " + refName + ".",
-			})
+	for _, sub := range schema.AllOf {
+		if sub.IsReference() {
+			fields = append(fields, embeddedRefField(sub))
+			continue
 		}
-	} else {
-		for _, sub := range schema.AllOf {
-			if sub.IsReference() {
-				refName := refToTypeName(sub.GetReference())
-				goRefName := naming.GoExported(refName)
-				fields = append(fields, Field{
-					Name:       goRefName,
-					JSONName:   "",
-					GoType:     TypeRef{Name: goRefName},
-					IsEmbedded: true,
-					DocComment: "allOf embedded from " + refName + ".",
-				})
-				continue
-			}
-			subSchema := sub.Schema()
-			if subSchema == nil {
-				continue
-			}
-			req := requiredSet(subSchema)
-			if subSchema.Properties != nil {
-				for jsonName, propProxy := range subSchema.Properties.FromOldest() {
-					fields = append(fields, b.buildField(jsonName, propProxy, req[jsonName], goName))
-				}
-			}
+		subSchema := sub.Schema()
+		if subSchema == nil || subSchema.Properties == nil {
+			continue
+		}
+		req := requiredSet(subSchema)
+		for jsonName, propProxy := range subSchema.Properties.FromOldest() {
+			fields = append(fields, b.buildField(jsonName, propProxy, req[jsonName], goName))
 		}
 	}
 
@@ -389,7 +403,7 @@ func (b *builder) buildUnionNamedType(goName, originalName string, schema *highb
 	}
 
 	hasPrimitive := false
-	var unionVariants []UnionVariant
+	unionVariants := make([]UnionVariant, 0, len(variants))
 	for i, vProxy := range variants {
 		goType := b.schemaToTypeRef(vProxy, goName, "Variant"+strconv.Itoa(i+1))
 		isPrim := isPrimitiveType(goType.Name)
@@ -439,11 +453,35 @@ func (b *builder) buildMapAliasNamedType(goName, originalName string, schema *hi
 	}
 }
 
+// isInlineComposite reports whether a schema is a oneOf/anyOf/allOf/enum
+// composite that must be promoted to its own inline named type.
+func isInlineComposite(schema *highbase.Schema) bool {
+	return len(schema.OneOf) > 0 || len(schema.AnyOf) > 0 || len(schema.AllOf) > 0 || len(schema.Enum) > 0
+}
+
+// containerTypeRef resolves array and additionalProperties-map schemas to a
+// TypeRef. The bool result is false when schema is not a container type.
+func (b *builder) containerTypeRef(schema *highbase.Schema, pt, parentGoName, fieldGoName string) (TypeRef, bool) {
+	if pt == "array" || (schema.Items != nil && schema.Items.IsA()) {
+		elemRef := b.itemsTypeRef(schema, parentGoName, fieldGoName)
+		return TypeRef{Name: "[]" + elemRef.Name, NeedsTime: elemRef.NeedsTime}, true
+	}
+	hasProps := schema.Properties != nil && schema.Properties.Len() > 0
+	if !hasProps && schema.AdditionalProperties != nil {
+		if schema.AdditionalProperties.IsA() {
+			elemRef := b.schemaToTypeRef(schema.AdditionalProperties.A, parentGoName, fieldGoName+"Value")
+			return TypeRef{Name: "map[string]" + elemRef.Name, NeedsTime: elemRef.NeedsTime}, true
+		}
+		return TypeRef{Name: "map[string]any", IsBuiltin: true}, true
+	}
+	return TypeRef{}, false
+}
+
 // schemaToTypeRef resolves a SchemaProxy to a TypeRef for use in field and
 // parameter types. Anonymous object schemas are promoted to named inline types.
 func (b *builder) schemaToTypeRef(proxy *highbase.SchemaProxy, parentGoName, fieldGoName string) TypeRef {
 	if proxy == nil {
-		return TypeRef{Name: "any", IsBuiltin: true}
+		return TypeRef{Name: goTypeAny, IsBuiltin: true}
 	}
 
 	// $ref → named reference; do not inline-expand.
@@ -457,40 +495,19 @@ func (b *builder) schemaToTypeRef(proxy *highbase.SchemaProxy, parentGoName, fie
 	schema := proxy.Schema()
 	if schema == nil {
 		b.diagWarn("field schema resolved to nil", parentGoName+"."+fieldGoName)
-		return TypeRef{Name: "any", IsBuiltin: true}
+		return TypeRef{Name: goTypeAny, IsBuiltin: true}
 	}
 
-	// Union (oneOf/anyOf) → inline named type.
-	if len(schema.OneOf) > 0 || len(schema.AnyOf) > 0 {
-		return b.allocInlineType(schema, parentGoName, fieldGoName)
-	}
-
-	// allOf → inline named type.
-	if len(schema.AllOf) > 0 {
-		return b.allocInlineType(schema, parentGoName, fieldGoName)
-	}
-
-	// Enum → inline named type.
-	if len(schema.Enum) > 0 {
+	// Composite schemas (oneOf/anyOf/allOf/enum) → inline named type.
+	if isInlineComposite(schema) {
 		return b.allocInlineType(schema, parentGoName, fieldGoName)
 	}
 
 	pt := schemaType(schema)
 
-	// Array.
-	if pt == "array" || (schema.Items != nil && schema.Items.IsA()) {
-		elemRef := b.itemsTypeRef(schema, parentGoName, fieldGoName)
-		return TypeRef{Name: "[]" + elemRef.Name, NeedsTime: elemRef.NeedsTime}
-	}
-
-	// Map (additionalProperties only, no explicit properties).
-	hasProps := schema.Properties != nil && schema.Properties.Len() > 0
-	if !hasProps && schema.AdditionalProperties != nil {
-		if schema.AdditionalProperties.IsA() {
-			elemRef := b.schemaToTypeRef(schema.AdditionalProperties.A, parentGoName, fieldGoName+"Value")
-			return TypeRef{Name: "map[string]" + elemRef.Name, NeedsTime: elemRef.NeedsTime}
-		}
-		return TypeRef{Name: "map[string]any", IsBuiltin: true}
+	// Array or map container.
+	if ref, ok := b.containerTypeRef(schema, pt, parentGoName, fieldGoName); ok {
+		return ref
 	}
 
 	// Scalar primitives.
@@ -499,13 +516,14 @@ func (b *builder) schemaToTypeRef(proxy *highbase.SchemaProxy, parentGoName, fie
 	}
 
 	// Inline object → promote to named type.
+	hasProps := schema.Properties != nil && schema.Properties.Len() > 0
 	if pt == "object" || hasProps {
 		return b.allocInlineType(schema, parentGoName, fieldGoName)
 	}
 
 	// Fallback.
-	b.diagWarn(fmt.Sprintf("unrecognised field schema type=%q", pt), parentGoName+"."+fieldGoName)
-	return TypeRef{Name: "any", IsBuiltin: true}
+	b.diagWarn(fmt.Sprintf("unrecognized field schema type=%q", pt), parentGoName+"."+fieldGoName)
+	return TypeRef{Name: goTypeAny, IsBuiltin: true}
 }
 
 // allocInlineType promotes an anonymous schema to a named NamedType and
@@ -513,7 +531,10 @@ func (b *builder) schemaToTypeRef(proxy *highbase.SchemaProxy, parentGoName, fie
 func (b *builder) allocInlineType(schema *highbase.Schema, parentGoName, fieldGoName string) TypeRef {
 	inlineName := b.newInlineName(parentGoName + fieldGoName)
 	docComment := inlineName + " is an inline schema under " + parentGoName + "." + fieldGoName + "."
-	nt, _ := b.schemaToNamedType(inlineName, parentGoName+"."+fieldGoName, schema, docComment)
+	nt, err := b.schemaToNamedType(inlineName, parentGoName+"."+fieldGoName, schema, docComment)
+	if err != nil {
+		b.diagWarn("inline schema build failed: "+err.Error(), parentGoName+"."+fieldGoName)
+	}
 	b.typeKinds[nt.Name] = nt.Kind
 	b.inlineTypes = append(b.inlineTypes, nt)
 	return TypeRef{Name: inlineName, IsEnum: nt.Kind == KindEnum}
@@ -540,19 +561,19 @@ func (b *builder) itemsTypeRef(schema *highbase.Schema, parentGoName, fieldGoNam
 	if schema.Items != nil && schema.Items.IsA() {
 		return b.schemaToTypeRef(schema.Items.A, parentGoName, fieldGoName+"Item")
 	}
-	return TypeRef{Name: "any", IsBuiltin: true}
+	return TypeRef{Name: goTypeAny, IsBuiltin: true}
 }
 
 // buildOperation converts a libopenapi Operation into an ir.Operation.
-func (b *builder) buildOperation(pathStr, method string, op *v3high.Operation, mergedParams []*v3high.Parameter) (*Operation, error) {
+func (b *builder) buildOperation(pathStr, method string, op *v3high.Operation, mergedParams []*v3high.Parameter) *Operation {
 	if op == nil {
-		return nil, nil
+		return nil
 	}
 
 	opID := op.OperationId
 	if opID == "" {
 		opID = strings.ToLower(method) + pathToID(pathStr)
-		b.diagWarn("operationId missing; synthesised "+opID, pathStr)
+		b.diagWarn("operationId missing; synthesized "+opID, pathStr)
 	}
 
 	goName := naming.GoExported(opID)
@@ -562,7 +583,7 @@ func (b *builder) buildOperation(pathStr, method string, op *v3high.Operation, m
 	// occurrence and emit a diagnostic for subsequent ones.
 	if b.seenOpGoNames[goName] {
 		b.diagWarn(fmt.Sprintf("duplicate operationId %q at %s %s; skipping subsequent occurrence", opID, method, pathStr), pathStr)
-		return nil, nil
+		return nil
 	}
 	b.seenOpGoNames[goName] = true
 
@@ -580,13 +601,22 @@ func (b *builder) buildOperation(pathStr, method string, op *v3high.Operation, m
 		DocComment: docComment,
 	}
 
-	// Classify merged parameters.
+	b.classifyParams(irOp, mergedParams, opID, goName)
+	b.attachRequestBody(irOp, op, opID, goName)
+	b.collectResponses(irOp, op, opID, goName)
+
+	return irOp
+}
+
+// classifyParams sorts the merged parameters of an operation into the path,
+// query, and header buckets on irOp, emitting diagnostics for cookie and
+// unknown parameter locations.
+func (b *builder) classifyParams(irOp *Operation, mergedParams []*v3high.Parameter, opID, goName string) {
 	for _, param := range mergedParams {
 		if param == nil {
 			continue
 		}
-		switch param.In {
-		case "cookie":
+		if param.In == "cookie" {
 			b.diagWarn("cookie parameter skipped (not in v1 scope)", opID)
 			continue
 		}
@@ -598,48 +628,55 @@ func (b *builder) buildOperation(pathStr, method string, op *v3high.Operation, m
 			irOp.QueryParams = append(irOp.QueryParams, irParam)
 		case ParamInHeader:
 			irOp.HeaderParams = append(irOp.HeaderParams, irParam)
+		case ParamInCookie:
+			// Cookie params are filtered out above; unreachable here.
+		default:
+			b.diagWarn("unknown parameter location "+param.In+"; skipped", opID)
 		}
 	}
+}
 
-	// Request body (application/json only; multipart noted as diagnostic).
-	if op.RequestBody != nil {
-		if ref := b.contentJSONSchemaRef(op.RequestBody.Content, goName+"Body"); ref != nil {
-			irOp.RequestBody = ref
-		} else if op.RequestBody.Content != nil && op.RequestBody.Content.GetOrZero("multipart/form-data") != nil {
-			b.diagWarn("multipart/form-data request body skipped (not in v1 scope)", opID)
-		}
+// attachRequestBody records the application/json request body schema on irOp,
+// emitting a diagnostic when only a multipart/form-data body is present.
+func (b *builder) attachRequestBody(irOp *Operation, op *v3high.Operation, opID, goName string) {
+	if op.RequestBody == nil {
+		return
 	}
-
-	// Responses: collect all 2xx status codes.
-	if op.Responses != nil && op.Responses.Codes != nil {
-		for code, resp := range op.Responses.Codes.FromOldest() {
-			statusCode, err := strconv.Atoi(code)
-			if err != nil || statusCode < 200 || statusCode >= 300 {
-				continue
-			}
-			if resp == nil {
-				irOp.Responses[statusCode] = nil
-				continue
-			}
-			ref := b.contentJSONSchemaRef(resp.Content, goName+"Response")
-			irOp.Responses[statusCode] = ref
-		}
-		// SSE (text/event-stream) diagnostic.
-		if op.Responses.Codes.GetOrZero("200") != nil {
-			resp := op.Responses.Codes.GetOrZero("200")
-			if resp != nil && resp.Content != nil && resp.Content.GetOrZero("text/event-stream") != nil {
-				b.diagWarn("SSE (text/event-stream) response skipped (not in v1 scope)", opID)
-			}
-		}
+	if ref := b.contentJSONSchemaRef(op.RequestBody.Content, goName+"Body"); ref != nil {
+		irOp.RequestBody = ref
+		return
 	}
+	if op.RequestBody.Content != nil && op.RequestBody.Content.GetOrZero("multipart/form-data") != nil {
+		b.diagWarn("multipart/form-data request body skipped (not in v1 scope)", opID)
+	}
+}
 
-	return irOp, nil
+// collectResponses records every 2xx response body schema on irOp and emits an
+// SSE diagnostic when a 200 text/event-stream response is present.
+func (b *builder) collectResponses(irOp *Operation, op *v3high.Operation, opID, goName string) {
+	if op.Responses == nil || op.Responses.Codes == nil {
+		return
+	}
+	for code, resp := range op.Responses.Codes.FromOldest() {
+		statusCode, err := strconv.Atoi(code)
+		if err != nil || statusCode < 200 || statusCode >= 300 {
+			continue
+		}
+		if resp == nil {
+			irOp.Responses[statusCode] = nil
+			continue
+		}
+		irOp.Responses[statusCode] = b.contentJSONSchemaRef(resp.Content, goName+"Response")
+	}
+	if resp := op.Responses.Codes.GetOrZero("200"); resp != nil && resp.Content != nil && resp.Content.GetOrZero("text/event-stream") != nil {
+		b.diagWarn("SSE (text/event-stream) response skipped (not in v1 scope)", opID)
+	}
 }
 
 // buildParam converts a libopenapi Parameter into an ir.Param.
 func (b *builder) buildParam(param *v3high.Parameter, opGoName string) Param {
 	goName := naming.GoField(param.Name)
-	goType := TypeRef{Name: "string", IsBuiltin: true}
+	goType := TypeRef{Name: goTypeString, IsBuiltin: true}
 	if param.Schema != nil {
 		goType = b.schemaToTypeRef(param.Schema, opGoName+"Params", goName)
 	}
@@ -736,7 +773,7 @@ func schemaType(schema *highbase.Schema) string {
 }
 
 // primitiveTypeRef converts a scalar schema to a TypeRef.
-// Returns a zero TypeRef when the schema is not a recognised primitive.
+// Returns a zero TypeRef when the schema is not a recognized primitive.
 func primitiveTypeRef(schema *highbase.Schema) TypeRef {
 	switch schemaType(schema) {
 	case "string":
@@ -746,10 +783,10 @@ func primitiveTypeRef(schema *highbase.Schema) TypeRef {
 		case "byte":
 			return TypeRef{Name: "[]byte", IsBuiltin: true}
 		}
-		return TypeRef{Name: "string", IsBuiltin: true}
+		return TypeRef{Name: goTypeString, IsBuiltin: true}
 	case "integer":
 		if schema.Format == "int32" {
-			return TypeRef{Name: "int32", IsBuiltin: true}
+			return TypeRef{Name: goTypeInt32, IsBuiltin: true}
 		}
 		return TypeRef{Name: "int64", IsBuiltin: true}
 	case "number":
@@ -768,7 +805,7 @@ func enumUnderlyingType(schema *highbase.Schema) TypeRef {
 	switch schemaType(schema) {
 	case "integer":
 		if schema.Format == "int32" {
-			return TypeRef{Name: "int32", IsBuiltin: true}
+			return TypeRef{Name: goTypeInt32, IsBuiltin: true}
 		}
 		return TypeRef{Name: "int64", IsBuiltin: true}
 	case "number":
@@ -777,7 +814,7 @@ func enumUnderlyingType(schema *highbase.Schema) TypeRef {
 		}
 		return TypeRef{Name: "float64", IsBuiltin: true}
 	}
-	return TypeRef{Name: "string", IsBuiltin: true} // default for string and untyped enums
+	return TypeRef{Name: goTypeString, IsBuiltin: true} // default for string and untyped enums
 }
 
 // requiredSet builds a set of required property names for O(1) lookup.
@@ -854,7 +891,7 @@ func isExportedIdent(s string) bool {
 }
 
 // pathToID converts a URL path to a PascalCase identifier fragment used when
-// synthesising operationIds for operations that lack them.
+// synthesizing operationIds for operations that lack them.
 func pathToID(p string) string {
 	p = strings.ReplaceAll(p, "{", "")
 	p = strings.ReplaceAll(p, "}", "")

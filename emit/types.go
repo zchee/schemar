@@ -23,7 +23,7 @@ import (
 	"fmt"
 	"go/format"
 	"os"
-	"sort"
+	"slices"
 	"strings"
 	"text/template"
 
@@ -49,10 +49,14 @@ type typesData struct {
 	HasStrategyBUnion bool
 }
 
+// brokenFileMode is the permission used for the debug ".broken" dump
+// written when go/format rejects the generated source.
+const brokenFileMode = 0o600
+
 // RenderTypes generates the content of types.go from irData and returns the
 // go/format-formatted Go source.
 //
-// If go/format.Source fails, the unformatted template output is written to
+// If [go/format.Source] fails, the unformatted template output is written to
 // brokenPath (when non-empty) so the template bug can be inspected, and the
 // format error is returned.
 func RenderTypes(irData *ir.IR, brokenPath string) ([]byte, error) {
@@ -76,7 +80,9 @@ func RenderTypes(irData *ir.IR, brokenPath string) ([]byte, error) {
 	formatted, fmtErr := format.Source(buf.Bytes())
 	if fmtErr != nil {
 		if brokenPath != "" {
-			_ = os.WriteFile(brokenPath, buf.Bytes(), 0o644)
+			if werr := os.WriteFile(brokenPath, buf.Bytes(), brokenFileMode); werr != nil {
+				return nil, fmt.Errorf("emit: writing broken output to %s: %w (after format error: %w)", brokenPath, werr, fmtErr)
+			}
 		}
 		return nil, fmt.Errorf("emit: formatting types.go (raw output written to %s): %w", brokenPath, fmtErr)
 	}
@@ -120,24 +126,14 @@ func anyPrimitiveVariant(variants []ir.UnionVariant) bool {
 // computeImports builds a sorted import-declaration list from the types and
 // the union strategy flag.  Standard library imports come first, then
 // third-party imports; each group is sorted alphabetically by import path.
+//
+//nolint:revive // hasStrategyBUnion is a data signal (the type set needs the json imports), not a behavior toggle.
 func computeImports(types []ir.NamedType, hasStrategyBUnion bool) []string {
 	paths := make(map[string]string) // path → alias (empty string = no alias)
 
-	for _, nt := range types {
-		switch nt.Kind {
-		case ir.KindStruct:
-			for _, f := range nt.Fields {
-				if f.GoType.NeedsTime {
-					paths["time"] = ""
-				}
-			}
-		case ir.KindAlias:
-			if nt.AliasTarget != nil && nt.AliasTarget.NeedsTime {
-				paths["time"] = ""
-			}
-		}
+	if typesNeedTime(types) {
+		paths["time"] = ""
 	}
-
 	if hasStrategyBUnion {
 		paths["github.com/go-json-experiment/json"] = "json"
 		paths["github.com/go-json-experiment/json/jsontext"] = ""
@@ -146,7 +142,38 @@ func computeImports(types []ir.NamedType, hasStrategyBUnion bool) []string {
 	if len(paths) == 0 {
 		return nil
 	}
+	return sortedImportLines(paths)
+}
 
+// typesNeedTime reports whether any struct field or alias target in types
+// requires the time package import.
+func typesNeedTime(types []ir.NamedType) bool {
+	for _, nt := range types {
+		switch nt.Kind {
+		case ir.KindStruct:
+			for _, f := range nt.Fields {
+				if f.GoType.NeedsTime {
+					return true
+				}
+			}
+		case ir.KindAlias:
+			if nt.AliasTarget != nil && nt.AliasTarget.NeedsTime {
+				return true
+			}
+		case ir.KindEnum, ir.KindUnion:
+			// Enum and union kinds never introduce a time import here.
+		default:
+			// Unknown kinds carry no time dependency.
+			continue
+		}
+	}
+	return false
+}
+
+// sortedImportLines partitions paths into standard-library and third-party
+// groups, sorts each alphabetically, and returns the formatted import lines
+// with the standard-library group first.
+func sortedImportLines(paths map[string]string) []string {
 	var stdlib, thirdparty []string
 	for p := range paths {
 		if strings.Contains(p, ".") {
@@ -155,8 +182,8 @@ func computeImports(types []ir.NamedType, hasStrategyBUnion bool) []string {
 			stdlib = append(stdlib, p)
 		}
 	}
-	sort.Strings(stdlib)
-	sort.Strings(thirdparty)
+	slices.Sort(stdlib)
+	slices.Sort(thirdparty)
 
 	result := make([]string, 0, len(paths))
 	for _, p := range stdlib {
@@ -221,7 +248,7 @@ func writeStructDecl(b *strings.Builder, nt ir.NamedType) {
 	for _, f := range nt.Fields {
 		writeFieldDecl(b, f)
 	}
-	fmt.Fprintf(b, "}\n\n")
+	fmt.Fprint(b, "}\n\n")
 }
 
 func writeFieldDecl(b *strings.Builder, f ir.Field) {
@@ -260,7 +287,7 @@ func writeEnumDecl(b *strings.Builder, nt ir.NamedType) {
 	isString := underlying == "string"
 
 	fmt.Fprintf(b, "// Enum values for %s.\n", nt.Name)
-	fmt.Fprintf(b, "const (\n")
+	fmt.Fprint(b, "const (\n")
 	for _, ev := range nt.EnumValues {
 		if isString {
 			fmt.Fprintf(b, "\t%s %s = %q\n", ev.Name, nt.Name, ev.Value)
@@ -268,7 +295,7 @@ func writeEnumDecl(b *strings.Builder, nt ir.NamedType) {
 			fmt.Fprintf(b, "\t%s %s = %s\n", ev.Name, nt.Name, ev.Value)
 		}
 	}
-	fmt.Fprintf(b, ")\n\n")
+	fmt.Fprint(b, ")\n\n")
 }
 
 // ── Alias ──────────────────────────────────────────────────────────────────
@@ -303,8 +330,8 @@ func writeStrategyAUnion(b *strings.Builder, nt ir.NamedType) {
 	}
 	fmt.Fprintf(b, "type %s struct {\n", nt.Name)
 	fmt.Fprintf(b, "\t// Value holds the %s value as an untyped any.\n", unionKind)
-	fmt.Fprintf(b, "\tValue any\n")
-	fmt.Fprintf(b, "}\n\n")
+	fmt.Fprint(b, "\tValue any\n")
+	fmt.Fprint(b, "}\n\n")
 }
 
 // writeStrategyBUnion emits a Strategy B union: a wrapper struct with one
@@ -326,26 +353,26 @@ func writeStrategyBUnion(b *strings.Builder, nt ir.NamedType) {
 	for _, v := range nt.UnionVariants {
 		fmt.Fprintf(b, "\t%s *%s\n", v.FieldName, v.GoType.Name)
 	}
-	fmt.Fprintf(b, "\traw jsontext.Value // retained when no variant matched\n")
-	fmt.Fprintf(b, "}\n\n")
+	fmt.Fprint(b, "\traw jsontext.Value // retained when no variant matched\n")
+	fmt.Fprint(b, "}\n\n")
 
 	// MarshalJSON.
 	fmt.Fprintf(b, "// MarshalJSON implements json.Marshaler for %s.\n", nt.Name)
-	fmt.Fprintf(b, "// It encodes whichever variant field is non-nil, or the raw retained bytes.\n")
+	fmt.Fprint(b, "// It encodes whichever variant field is non-nil, or the raw retained bytes.\n")
 	fmt.Fprintf(b, "func (u *%s) MarshalJSON() ([]byte, error) {\n", nt.Name)
-	fmt.Fprintf(b, "\tswitch {\n")
+	fmt.Fprint(b, "\tswitch {\n")
 	for _, v := range nt.UnionVariants {
 		fmt.Fprintf(b, "\tcase u.%s != nil:\n\t\treturn json.Marshal(u.%s)\n", v.FieldName, v.FieldName)
 	}
-	fmt.Fprintf(b, "\tdefault:\n")
-	fmt.Fprintf(b, "\t\tif len(u.raw) > 0 {\n\t\t\treturn []byte(u.raw), nil\n\t\t}\n")
-	fmt.Fprintf(b, "\t\treturn []byte(\"null\"), nil\n")
-	fmt.Fprintf(b, "\t}\n}\n\n")
+	fmt.Fprint(b, "\tdefault:\n")
+	fmt.Fprint(b, "\t\tif len(u.raw) > 0 {\n\t\t\treturn []byte(u.raw), nil\n\t\t}\n")
+	fmt.Fprint(b, "\t\treturn []byte(\"null\"), nil\n")
+	fmt.Fprint(b, "\t}\n}\n\n")
 
 	// UnmarshalJSON (trial-decode).
 	fmt.Fprintf(b, "// UnmarshalJSON implements json.Unmarshaler for %s.\n", nt.Name)
-	fmt.Fprintf(b, "// It tries each variant using strict decode; on total failure the raw bytes\n")
-	fmt.Fprintf(b, "// are retained for forensic inspection.\n")
+	fmt.Fprint(b, "// It tries each variant using strict decode; on total failure the raw bytes\n")
+	fmt.Fprint(b, "// are retained for forensic inspection.\n")
 	fmt.Fprintf(b, "func (u *%s) UnmarshalJSON(b []byte) error {\n", nt.Name)
 
 	// Declare target variables.
@@ -354,20 +381,20 @@ func writeStrategyBUnion(b *strings.Builder, nt ir.NamedType) {
 	}
 
 	// Call unmarshalTrial.
-	fmt.Fprintf(b, "\tidx, err := unmarshalTrial(b, []func([]byte) error{\n")
+	fmt.Fprint(b, "\tidx, err := unmarshalTrial(b, []func([]byte) error{\n")
 	for _, v := range nt.UnionVariants {
 		fmt.Fprintf(b, "\t\tfunc(data []byte) error { return strictUnmarshal(data, &v%s) },\n", v.FieldName)
 	}
-	fmt.Fprintf(b, "\t})\n")
-	fmt.Fprintf(b, "\tif err != nil {\n\t\treturn err\n\t}\n")
+	fmt.Fprint(b, "\t})\n")
+	fmt.Fprint(b, "\tif err != nil {\n\t\treturn err\n\t}\n")
 
 	// Switch on result.
-	fmt.Fprintf(b, "\tswitch idx {\n")
+	fmt.Fprint(b, "\tswitch idx {\n")
 	for i, v := range nt.UnionVariants {
 		fmt.Fprintf(b, "\tcase %d:\n\t\tu.%s = &v%s\n", i, v.FieldName, v.FieldName)
 	}
-	fmt.Fprintf(b, "\tdefault:\n\t\tu.raw = b\n")
-	fmt.Fprintf(b, "\t}\n\treturn nil\n}\n\n")
+	fmt.Fprint(b, "\tdefault:\n\t\tu.raw = b\n")
+	fmt.Fprint(b, "\t}\n\treturn nil\n}\n\n")
 }
 
 // ── Union helper declarations ──────────────────────────────────────────────

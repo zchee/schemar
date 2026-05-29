@@ -26,11 +26,10 @@ import (
 	json "github.com/go-json-experiment/json"
 	"github.com/go-json-experiment/json/jsontext"
 	gocmp "github.com/google/go-cmp/cmp"
-	yamlv4 "go.yaml.in/yaml/v4"
-
 	highbase "github.com/pb33f/libopenapi/datamodel/high/base"
 	v3high "github.com/pb33f/libopenapi/datamodel/high/v3"
 	"github.com/pb33f/libopenapi/orderedmap"
+	yamlv4 "go.yaml.in/yaml/v4"
 
 	"github.com/zchee/schemar/emit"
 	"github.com/zchee/schemar/ir"
@@ -186,6 +185,32 @@ func runGolden(t *testing.T, specPath, goldenDir string) {
 // ── JSON roundtrip ────────────────────────────────────────────────────────
 
 // TestJSONRoundtrip_Google verifies that every examples: block in the Google
+// collectOpExamples appends request-body and response JSON examples for one
+// operation to cases, keeping TestJSONRoundtrip_Google's walk loop flat.
+func collectOpExamples(t *testing.T, pathStr, method string, op *v3high.Operation, cases *[]exampleCase) {
+	t.Helper()
+
+	if op.RequestBody != nil && op.RequestBody.Content != nil {
+		if mt := op.RequestBody.Content.GetOrZero("application/json"); mt != nil {
+			collectExamples(t, fmt.Sprintf("%s %s requestBody", method, pathStr), mt, cases)
+		}
+	}
+
+	if op.Responses == nil || op.Responses.Codes == nil {
+		return
+	}
+	for code, resp := range op.Responses.Codes.FromOldest() {
+		if resp == nil || resp.Content == nil {
+			continue
+		}
+		mt := resp.Content.GetOrZero("application/json")
+		if mt == nil {
+			continue
+		}
+		collectExamples(t, fmt.Sprintf("%s %s %s", method, pathStr, code), mt, cases)
+	}
+}
+
 // spec produces stable, canonicalisable JSON. The test does NOT use the
 // generated typed structs (those are compiled in the E2E gate); instead it
 // round-trips through map[string]any to verify structural JSON integrity.
@@ -200,37 +225,13 @@ func TestJSONRoundtrip_Google(t *testing.T) {
 	var cases []exampleCase
 
 	// Walk all paths → operations → request + response examples.
-	if doc.Model.Paths != nil && doc.Model.Paths.PathItems != nil {
-		for pathStr, pi := range doc.Model.Paths.PathItems.FromOldest() {
-			for _, pair := range collectPathOps(pi) {
-				op := pair.op
-				if op == nil {
-					continue
-				}
-
-				// Request body examples.
-				if op.RequestBody != nil && op.RequestBody.Content != nil {
-					mt := op.RequestBody.Content.GetOrZero("application/json")
-					if mt != nil {
-						collectExamples(t, fmt.Sprintf("%s %s requestBody", pair.method, pathStr), mt, &cases)
-					}
-				}
-
-				// Response examples.
-				if op.Responses == nil || op.Responses.Codes == nil {
-					continue
-				}
-				for code, resp := range op.Responses.Codes.FromOldest() {
-					if resp == nil || resp.Content == nil {
-						continue
-					}
-					mt := resp.Content.GetOrZero("application/json")
-					if mt == nil {
-						continue
-					}
-					loc := fmt.Sprintf("%s %s %s", pair.method, pathStr, code)
-					collectExamples(t, loc, mt, &cases)
-				}
+	if doc.Model.Paths == nil || doc.Model.Paths.PathItems == nil {
+		t.Skip("spec has no paths")
+	}
+	for pathStr, pi := range doc.Model.Paths.PathItems.FromOldest() {
+		for _, pair := range collectPathOps(pi) {
+			if pair.op != nil {
+				collectOpExamples(t, pathStr, pair.method, pair.op, &cases)
 			}
 		}
 	}
@@ -359,7 +360,7 @@ func collectExamples(t *testing.T, location string, mt *v3high.MediaType, cases 
 	}
 }
 
-// formatDiagnostics serialises ir.Diagnostic values as a sorted, deterministic
+// formatDiagnostics serializes ir.Diagnostic values as a sorted, deterministic
 // text block suitable for golden-file comparison.
 func formatDiagnostics(diags []ir.Diagnostic) string {
 	if len(diags) == 0 {

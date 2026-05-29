@@ -20,6 +20,7 @@ import (
 	"testing"
 
 	gocmp "github.com/google/go-cmp/cmp"
+
 	"github.com/zchee/schemar/ir"
 	"github.com/zchee/schemar/spec"
 )
@@ -587,14 +588,12 @@ components:
 			if diff := gocmp.Diff(tc.queryParamCount, len(op.QueryParams)); diff != "" {
 				t.Errorf("QueryParams count:\n%s", diff)
 			}
-			if tc.wantBodyType == "" {
-				if op.RequestBody != nil {
-					t.Errorf("expected no request body, got %q", op.RequestBody.Name)
-				}
-			} else {
-				if op.RequestBody == nil {
-					t.Fatal("expected request body, got nil")
-				}
+			switch {
+			case tc.wantBodyType == "" && op.RequestBody != nil:
+				t.Errorf("expected no request body, got %q", op.RequestBody.Name)
+			case tc.wantBodyType != "" && op.RequestBody == nil:
+				t.Fatal("expected request body, got nil")
+			case tc.wantBodyType != "":
 				if diff := gocmp.Diff(tc.wantBodyType, op.RequestBody.Name); diff != "" {
 					t.Errorf("RequestBody.Name:\n%s", diff)
 				}
@@ -740,7 +739,7 @@ func TestBuild_Integration_OpenAISpec(t *testing.T) {
 	// The OpenAI spec is expected to emit at least some primitive-union diagnostics.
 	hasPrimitiveDiag := false
 	for _, d := range diags {
-		if d.Kind == ir.DiagnosticWarning && len(d.Message) > 0 {
+		if d.Kind == ir.DiagnosticWarning && d.Message != "" {
 			hasPrimitiveDiag = true
 			break
 		}

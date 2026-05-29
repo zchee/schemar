@@ -14,37 +14,13 @@
 
 package emit
 
-import (
-	_ "embed"
-	"fmt"
-	"go/format"
-	"strings"
-	"text/template"
-)
+import _ "embed"
 
 //go:embed templates/errors.tmpl
 var errorsTmplSrc string
 
 // Errors generates the content of errors.go for the given package name.
 // The output is fully static (the Error type and decodeError helper).
-// go/format.Source is applied; on failure the raw output is returned alongside
-// the error so callers can write a .broken file for debugging.
 func Errors(pkgName string) ([]byte, error) {
-	tmpl, err := template.New("errors").Parse(errorsTmplSrc)
-	if err != nil {
-		return nil, fmt.Errorf("emit/errors: parse template: %w", err)
-	}
-
-	data := struct{ PackageName string }{PackageName: pkgName}
-
-	var sb strings.Builder
-	if err := tmpl.Execute(&sb, data); err != nil {
-		return nil, fmt.Errorf("emit/errors: execute template: %w", err)
-	}
-
-	formatted, fmtErr := format.Source([]byte(sb.String()))
-	if fmtErr != nil {
-		return []byte(sb.String()), fmt.Errorf("emit/errors: go/format: %w", fmtErr)
-	}
-	return formatted, nil
+	return renderStaticTemplate("errors", errorsTmplSrc, pkgName)
 }
