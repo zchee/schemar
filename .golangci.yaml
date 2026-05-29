@@ -46,7 +46,6 @@ formatters:
         - standard
         - default
         - prefix(github.com/zchee/schemar)
-        - blank
         - dot
       custom-order: true
       no-lex-order: false
@@ -370,9 +369,6 @@ linters:
         - generic
 
     godoclint:
-      options:
-        max-len:
-          length: 120
       enable:
         - pkg-doc
         - single-pkg-doc
@@ -383,10 +379,11 @@ linters:
         - max-len
         - no-unused-link
         - require-stdlib-doclink
-
-    # modernize:
-    #   disable:
-    #     - f
+      options:
+        max-len:
+          length: 120
+        single-pkg-doc:
+          include-tests: false
 
     inamedparam:
       skip-single-param: true
@@ -427,7 +424,6 @@ linters:
           - gocognit
           - goconst
           - gocyclo
-          - godoclint
           - gosec
           - lll
           - maintidx
