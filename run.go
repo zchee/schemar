@@ -24,6 +24,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"time"
 
 	"github.com/zchee/schemar/emit"
 	"github.com/zchee/schemar/ir"
@@ -269,7 +270,10 @@ func runGoVet(outDir string, verbose bool) {
 	if err != nil {
 		return
 	}
-	cmd := exec.CommandContext(context.Background(), goPath, "vet", "./...")
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
+
+	cmd := exec.CommandContext(ctx, goPath, "vet", "./...")
 	cmd.Dir = outDir
 	out, err := cmd.CombinedOutput()
 	switch {

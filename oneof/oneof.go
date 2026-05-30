@@ -188,8 +188,6 @@ func UnmarshalTrial(data []byte, decoders []func([]byte) error) (int, error) {
 // structurally incompatible JSON objects are rejected. It is the recommended
 // decoder function to supply to UnmarshalTrial for Strategy B trial-decode.
 func StrictUnmarshal(data []byte, v any) error {
-	if err := json.Unmarshal(data, v, json.RejectUnknownMembers(true)); err != nil {
-		return fmt.Errorf("oneof: strict unmarshal: %w", err)
-	}
-	return nil
+	//nolint:wrapcheck // json unmarshal is strict mode. Avoid fmt.Errorf allocation in hot trial-decoding path
+	return json.Unmarshal(data, v, json.RejectUnknownMembers(true))
 }
